@@ -37,4 +37,10 @@ parser.add_argument(
         action='store_true',
         help='restores previous styling'
         )
+
 arguments = parser.parse_args()
+
+from themes import themes
+
+if(arguments.list):
+        print(themes)
