@@ -33,7 +33,7 @@ export interface Stickers {
   normal?: string;
 }
 
-export interface EclipseDokiThemeDefinition {
+export interface JupyterDokiThemeDefinition {
   id: string;
   overrides: {
     editorScheme?: {

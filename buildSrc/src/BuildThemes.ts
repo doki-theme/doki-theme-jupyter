@@ -1,5 +1,5 @@
 // @ts-ignore
-import {DokiThemeDefinitions, EclipseDokiThemeDefinition, MasterDokiThemeDefinition, StringDictonary} from './types';
+import {DokiThemeDefinitions, JupyterDokiThemeDefinition, MasterDokiThemeDefinition, StringDictonary} from './types';
 import GroupToNameMapping from "./GroupMappings";
 
 const path = require('path');
@@ -11,13 +11,7 @@ const fs = require('fs');
 const masterThemeDefinitionDirectoryPath =
   path.resolve(repoDirectory, 'masterThemes');
 
-const eclipseTemplateDefinitionDirectoryPath = path.resolve(
-  repoDirectory,
-  "buildAssets",
-  "templates"
-);
-
-const eclipseDefinitionDirectoryPath = path.resolve(
+const jupyterDefinitionDirectoryPath = path.resolve(
   repoDirectory,
   "buildSrc",
   "assets",
@@ -201,7 +195,7 @@ function resolveTemplateVariable(
   const isToRGB = templateVariable.startsWith('^');
   const cleanTemplateVariable = templateVariable.substr(isToRGB ? 1 : 0);
   const hexColor = resolveColor(getColorFromTemplate(templateVariables, cleanTemplateVariable), templateVariables);
-  return isToRGB ? hexToRGB(hexColor).join(',') : hexColor;
+  return hexColor;
 }
 
 
@@ -247,70 +241,20 @@ function fillInTemplateScript(
     }).join('\n');
 }
 
-/**
- * Converts an RGB color value to HSL. Conversion formula
- * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
- * Assumes r, g, and b are contained in the set [0, 255] and
- * returns h, s, and l in the set [0, 1].
- *
- * @param   Number  r       The red color value
- * @param   Number  g       The green color value
- * @param   Number  b       The blue color value
- * @return  Array           The HSL representation
- */
-function rgbToHsl([r, g, b]: [number, number, number]) {
-  r /= 255, g /= 255, b /= 255;
-
-  const max = Math.max(r, g, b), min = Math.min(r, g, b);
-  const l = (max + min) / 2;
-  let s: number;
-  let h = l;
-
-  if (max == min) {
-    h = s = 0; // achromatic
-  } else {
-    var d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-    switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
-    }
-
-    h /= 6;
-  }
-
-  return [ Math.round(h * 300), Math.round(s * 100), Math.round(l * 100) ];
-}
-
-function hexToRGB(s: string | [number, number, number]): [number, number, number] {
-  if (typeof s === 'string') {
-    const hex = parseInt(s.substr(1), 16)
-    return [
-      (hex & 0xFF0000) >> 16,
-      (hex & 0xFF00) >> 8,
-      (hex & 0xFF)
-    ]
-  }
-  return s;
-
-}
-
 // todo: dis
-type DokiThemeEclipse = {
+type DokiThemeJupyter = {
   [k: string]: any
 }
 
 function buildNamedColors(
   dokiThemeDefinition: MasterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
-  dokiThemeEclipseDefinition: EclipseDokiThemeDefinition,
-): DokiThemeEclipse {
+  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition,
+): DokiThemeJupyter {
   const namedColors = constructNamedColorTemplate(
     dokiThemeDefinition, dokiTemplateDefinitions
   )
-  const colorsOverride = dokiThemeEclipseDefinition.overrides.theme?.colors || {};
+  const colorsOverride = dokiThemeJupyterDefinition.overrides.theme?.colors || {};
   return {
     ...namedColors,
     ...colorsOverride
@@ -321,7 +265,7 @@ function createDokiTheme(
   dokiFileDefinitionPath: string,
   dokiThemeDefinition: MasterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
-  dokiThemeEclipseDefinition: EclipseDokiThemeDefinition,
+  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition,
 ) {
   try {
     return {
@@ -334,10 +278,10 @@ function createDokiTheme(
       namedColors: buildNamedColors(
         dokiThemeDefinition,
         dokiTemplateDefinitions,
-        dokiThemeEclipseDefinition,
+        dokiThemeJupyterDefinition,
       ),
       theme: {},
-      eclipseDefinition: dokiThemeEclipseDefinition
+      jupyterDefinition: dokiThemeJupyterDefinition
     };
   } catch (e) {
     throw new Error(`Unable to build ${dokiThemeDefinition.name}'s theme for reasons ${e}`);
@@ -408,7 +352,7 @@ const getStickers = (
 
 console.log('Preparing to generate themes.');
 
-type DokiTheme = { path: string; namedColors: DokiThemeEclipse; definition: MasterDokiThemeDefinition; stickers: { default: { path: string; name: string } }; theme: {} };
+type DokiTheme = { path: string; namedColors: DokiThemeJupyter; definition: MasterDokiThemeDefinition; stickers: { default: { path: string; name: string } }; theme: {} };
 
 function getGroupName(dokiTheme: DokiTheme) {
   return GroupToNameMapping[dokiTheme.definition.group];
@@ -418,76 +362,29 @@ function getDisplayName(dokiTheme: DokiTheme) {
   return `${(getGroupName(dokiTheme))}${dokiTheme.definition.name}`;
 }
 
-function buildThemeId(dokiTheme: { path: string; definition: MasterDokiThemeDefinition; stickers: { default: { path: string; name: string } }; theme: {}; namedColors: DokiThemeEclipse }) {
-  return `${dokiTheme.definition.dark ? 'dark_' : ''}${dokiTheme.definition.id}`;
-}
 
 const themesDirectory = path.resolve(repoDirectory, 'plugin-source', 'themes');
 
-function writeCssFile(pathSegments: string, templateToFillIn: string, dokiTheme: { path: string; definition: MasterDokiThemeDefinition; stickers: { default: { path: string; name: string } }; theme: {}; namedColors: DokiThemeEclipse }) {
-  fs.writeFileSync(
-    path.resolve(themesDirectory, 'css', pathSegments),
-    fillInTemplateScript(
-      templateToFillIn,
-      dokiTheme.namedColors
-    ),
-    {
-      encoding: 'utf-8',
-    },
-  );
-}
 
-const devstyleAssetsDirectory = path.resolve(repoDirectory, 'devStyleThemes')
-function writeSyntaxFile(pathSegments: string,
-                         templateToFillIn: string, dokiTheme: { path: string; definition: MasterDokiThemeDefinition; stickers: { default: { path: string; name: string } }; theme: {}; namedColors: DokiThemeEclipse, eclipseDefinition: EclipseDokiThemeDefinition },
-                         themeId: number) {
-  const themeDirectory = path.resolve(devstyleAssetsDirectory, getDisplayName(dokiTheme))
-  const devstyleSyntaxXml = path.resolve(themeDirectory, pathSegments);
-  fs.mkdirSync(path.dirname(devstyleSyntaxXml), {recursive: true})
-  const hsl = rgbToHsl(hexToRGB(dokiTheme.namedColors.baseBackground)).join(', ')
-  const themeToCustomize = dokiTheme.definition.dark ? `Dark` : `Light`
-  fs.writeFileSync(
-    path.resolve(themeDirectory, `${themeToCustomize} Custom HSL: ${hsl}`),
-    hsl
-  )
-  fs.writeFileSync(
-    devstyleSyntaxXml,
-    fillInTemplateScript(
-      templateToFillIn,
-      {
-        ...dokiTheme.namedColors,
-        ...(dokiTheme.definition.overrides?.editorScheme?.colors || {}),
-        ...(dokiTheme.eclipseDefinition.overrides.editorScheme?.colors || {}),
-        ...dokiTheme.definition,
-        themeId: themeId.toString(),
-        modifiedDate: new Date().toISOString()
-      }
-    ),
-    {
-      encoding: 'utf-8',
-    },
-  );
-}
-
-walkDir(eclipseDefinitionDirectoryPath)
+walkDir(jupyterDefinitionDirectoryPath)
   .then((files) =>
-    files.filter((file) => file.endsWith("eclipse.definition.json"))
+    files.filter((file) => file.endsWith("jupyter.definition.json"))
   )
-  .then((dokiThemeEclipseDefinitionPaths) => {
+  .then((dokiThemeJupyterDefinitionPaths) => {
     return {
-      dokiThemeEclipseDefinitions: dokiThemeEclipseDefinitionPaths
-        .map((dokiThemeEclipseDefinitionPath) =>
-          readJson<EclipseDokiThemeDefinition>(dokiThemeEclipseDefinitionPath)
+      dokiThemeJupyterDefinitions: dokiThemeJupyterDefinitionPaths
+        .map((dokiThemeJupyterDefinitionPath) =>
+          readJson<JupyterDokiThemeDefinition>(dokiThemeJupyterDefinitionPath)
         )
         .reduce(
-          (accum: StringDictonary<EclipseDokiThemeDefinition>, def) => {
+          (accum: StringDictonary<JupyterDokiThemeDefinition>, def) => {
             accum[def.id] = def;
             return accum;
           },
           {}
         ),
     };
-  }).then(({dokiThemeEclipseDefinitions}) =>
+  }).then(({dokiThemeJupyterDefinitions}) =>
   walkDir(path.resolve(masterThemeDefinitionDirectoryPath, 'templates'))
     .then(readTemplates)
     .then(dokiTemplateDefinitions => {
@@ -495,7 +392,7 @@ walkDir(eclipseDefinitionDirectoryPath)
         .then(files => files.filter(file => file.endsWith('master.definition.json')))
         .then(dokiFileDefinitionPaths => {
           return {
-            dokiThemeEclipseDefinitions,
+            dokiThemeJupyterDefinitions,
             dokiTemplateDefinitions,
             dokiFileDefinitionPaths
           };
@@ -504,24 +401,24 @@ walkDir(eclipseDefinitionDirectoryPath)
   .then(templatesAndDefinitions => {
     const {
       dokiTemplateDefinitions,
-      dokiThemeEclipseDefinitions,
+      dokiThemeJupyterDefinitions,
       dokiFileDefinitionPaths
     } = templatesAndDefinitions;
 
     return dokiFileDefinitionPaths
       .map(dokiFileDefinitionPath => {
         const dokiThemeDefinition = readJson<MasterDokiThemeDefinition>(dokiFileDefinitionPath);
-        const dokiThemeEclipseDefinition =
-          dokiThemeEclipseDefinitions[dokiThemeDefinition.id];
-        if (!dokiThemeEclipseDefinition) {
+        const dokiThemeJupyterDefinition =
+          dokiThemeJupyterDefinitions[dokiThemeDefinition.id];
+        if (!dokiThemeJupyterDefinition) {
           throw new Error(
-            `${dokiThemeDefinition.displayName}'s theme does not have a Eclipse Definition!!`
+            `${dokiThemeDefinition.displayName}'s theme does not have a Jupyter Definition!!`
           );
         }
         return ({
           dokiFileDefinitionPath,
           dokiThemeDefinition,
-          dokiThemeEclipseDefinition,
+          dokiThemeJupyterDefinition,
         });
       })
       .filter(pathAndDefinition =>
@@ -532,104 +429,31 @@ walkDir(eclipseDefinitionDirectoryPath)
       .map(({
               dokiFileDefinitionPath,
               dokiThemeDefinition,
-              dokiThemeEclipseDefinition,
+              dokiThemeJupyterDefinition,
             }) =>
         createDokiTheme(
           dokiFileDefinitionPath,
           dokiThemeDefinition,
           dokiTemplateDefinitions,
-          dokiThemeEclipseDefinition,
+          dokiThemeJupyterDefinition,
         )
       );
   })
   .then(dokiThemes => {
-    const devStyleSyntaxXml = fs.readFileSync(
-      path.resolve(eclipseTemplateDefinitionDirectoryPath, 'syntax.xml'), {encoding: 'utf-8'}
-    );
-    const themeIdsToDumbEclipseIds = dokiThemes.map(dokiTheme => dokiTheme.definition.id)
-      .sort((a,b) => a.localeCompare(b))
-      .reduce((accum, themeId, index)=> ({
-        ...accum,
-        [themeId] : index
-      }) , {} as StringDictonary<number>);
-
-    fs.rmdirSync(devstyleAssetsDirectory, {recursive: true})
-    dokiThemes.forEach(dokiTheme => {
-      writeSyntaxFile(
-        `${dokiTheme.definition.name}.xml`,
-        devStyleSyntaxXml,
-        dokiTheme,
-        (themeIdsToDumbEclipseIds[dokiTheme.definition.id] || 0) + 6969
-      )
-    });
-    // const pluginXmlPath = path.resolve(repoDirectory, 'plugin.xml');
-    // return toXml(fs.readFileSync(pluginXmlPath, {
-    //   encoding: 'utf8'
-    // }))
-      // .then(pluginXml => {
-      //   const cssXMLExtension = pluginXml.plugin.extension.find(
-      //     (extension: any) => extension.$.point === 'org.eclipse.e4.ui.css.swt.theme'
-      //   );
-      //
-      //   const createLafCssFileName = (dokiTheme: DokiTheme) => `${dokiTheme.definition.name}.css`;
-      //   const createSyntaxCssFileName = (dokiTheme: DokiTheme) => `${dokiTheme.definition.name}.syntax.css`;
-      //
-      //   cssXMLExtension.theme =
-      //     dokiThemes.map(dokiTheme => ({
-      //       '$': {
-      //         'basestylesheeturi': `themes/css/${createLafCssFileName(dokiTheme)}`,
-      //         'id': buildThemeId(dokiTheme),
-      //         'label': getDisplayName(dokiTheme),
-      //       }
-      //     }));
-      //
-      //   cssXMLExtension.stylesheet =
-      //     dokiThemes.map(dokiTheme => ({
-      //       '$': {
-      //         'uri': `themes/css/${createSyntaxCssFileName(dokiTheme)}`,
-      //       },
-      //       themeId: {
-      //         '$': {
-      //           refid: buildThemeId(dokiTheme)
-      //         },
-      //       }
-      //     }));
-      //   const xml = xmlBuilder.buildObject(pluginXml);
-      //
-      //   fs.writeFileSync(path.resolve(pluginXmlPath), xml, 'utf8');
-      //
-      //   const lafCSSTemplate = fs.readFileSync(
-      //     path.resolve(eclipseTemplateDefinitionDirectoryPath, 'theme.template.css'),
-      //     {
-      //       encoding: 'utf-8',
-      //     });
-      //
-      //   const syntaxCSSTemplate = fs.readFileSync(
-      //     path.resolve(eclipseTemplateDefinitionDirectoryPath,
-      //       'syntax.coloring.template.css'),
-      //     {
-      //       encoding: 'utf-8',
-      //     });
-      //
-      //   dokiThemes.forEach(dokiTheme => {
-      //     writeCssFile(createLafCssFileName(dokiTheme), lafCSSTemplate, dokiTheme);
-      //     writeCssFile(createSyntaxCssFileName(dokiTheme), syntaxCSSTemplate, dokiTheme);
-      //   });
-      // })
-      // .then(() => {
-        fs.writeFileSync(path.resolve(themesDirectory, 'themes.json'),
-          JSON.stringify(dokiThemes.reduce((accum, dokiTheme) => ({
-            ...accum,
-            [dokiTheme.definition.id]: {
-              id: dokiTheme.definition.id,
-              displayName: getDisplayName(dokiTheme),
-              stickers: dokiTheme.stickers,
-              isDark: dokiTheme.definition.dark,
-            }
-          }), {}), null, 2), {
-            encoding: 'utf-8',
-          })
-      // });
+    console.log(dokiThemes);
+    
+    // fs.writeFileSync(path.resolve(themesDirectory, 'themes.json'),
+    //   JSON.stringify(dokiThemes.reduce((accum, dokiTheme) => ({
+    //     ...accum,
+    //     [dokiTheme.definition.id]: {
+    //       id: dokiTheme.definition.id,
+    //       displayName: getDisplayName(dokiTheme),
+    //       stickers: dokiTheme.stickers,
+    //       isDark: dokiTheme.definition.dark,
+    //     }
+    //   }), {}), null, 2), {
+    //     encoding: 'utf-8',
+    //   })
   })
   .then(() => {
     console.log('Theme Generation Complete!');
