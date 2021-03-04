@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from themes import themes
 
 parser = ArgumentParser()
 parser.add_argument(
@@ -40,7 +41,14 @@ parser.add_argument(
 
 arguments = parser.parse_args()
 
-from themes import themes
-
 if(arguments.list):
   print( "Available Themes: \n   {}".format('\n   '.join(themes)))
+  exit(0)
+elif(arguments.remove):
+  print('finna remove')
+  exit(0)
+elif(arguments.set_theme not in themes):
+  print("bruh I don't know what you are talking about")
+  exit(-1)
+else:
+  print('finna install {}'.format(arguments.set_theme))
