@@ -480,9 +480,12 @@ walkDir(jupyterDefinitionDirectoryPath)
     fs.writeFileSync(
       path.resolve(themesDirectory, "themes.py"),
       `themes = ${JSON.stringify(
-        dokiThemes.map((dokiTheme) => getDisplayName(dokiTheme)).sort(
-          (a, b) => a.localeCompare(b)
-        ),
+        dokiThemes.reduce((accum, dokiTheme) => ({
+          ...accum,
+          [getDisplayName(dokiTheme)] : {
+            id: dokiTheme.definition.id,
+          }
+        }), {}),
         null,
         2
       )}`,
