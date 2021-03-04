@@ -43,4 +43,4 @@ arguments = parser.parse_args()
 from themes import themes
 
 if(arguments.list):
-        print(themes)
+  print( "Available Themes: \n   {}".format('\n   '.join(themes)))

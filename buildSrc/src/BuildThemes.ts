@@ -1,15 +1,22 @@
 // @ts-ignore
-import {DokiThemeDefinitions, JupyterDokiThemeDefinition, MasterDokiThemeDefinition, StringDictonary} from './types';
+import {
+  DokiThemeDefinitions,
+  JupyterDokiThemeDefinition,
+  MasterDokiThemeDefinition,
+  StringDictonary,
+} from "./types";
 import GroupToNameMapping from "./GroupMappings";
 
-const path = require('path');
+const path = require("path");
 
-const repoDirectory = path.resolve(__dirname, '..', '..');
+const repoDirectory = path.resolve(__dirname, "..", "..");
 
-const fs = require('fs');
+const fs = require("fs");
 
-const masterThemeDefinitionDirectoryPath =
-  path.resolve(repoDirectory, 'masterThemes');
+const masterThemeDefinitionDirectoryPath = path.resolve(
+  repoDirectory,
+  "masterThemes"
+);
 
 const jupyterDefinitionDirectoryPath = path.resolve(
   repoDirectory,
@@ -18,9 +25,9 @@ const jupyterDefinitionDirectoryPath = path.resolve(
   "templates"
 );
 
-
 function walkDir(dir: string): Promise<string[]> {
-  const values: Promise<string[]>[] = fs.readdirSync(dir)
+  const values: Promise<string[]>[] = fs
+    .readdirSync(dir)
     .map((file: string) => {
       const dirPath: string = path.join(dir, file);
       const isDirectory = fs.statSync(dirPath).isDirectory();
@@ -30,32 +37,31 @@ function walkDir(dir: string): Promise<string[]> {
         return Promise.resolve([path.join(dir, file)]);
       }
     });
-  return Promise.all(values)
-    .then((scannedDirectories) => scannedDirectories
-      .reduce((accum, files) => accum.concat(files), []));
+  return Promise.all(values).then((scannedDirectories) =>
+    scannedDirectories.reduce((accum, files) => accum.concat(files), [])
+  );
 }
 
-const LAF_TYPE = 'laf';
-const SYNTAX_TYPE = 'syntax';
-const NAMED_COLOR_TYPE = 'colorz';
+const LAF_TYPE = "laf";
+const SYNTAX_TYPE = "syntax";
+const NAMED_COLOR_TYPE = "colorz";
 
 function getTemplateType(templatePath: string) {
-  if (templatePath.endsWith('laf.template.json')) {
+  if (templatePath.endsWith("laf.template.json")) {
     return LAF_TYPE;
-  } else if (templatePath.endsWith('syntax.template.json')) {
+  } else if (templatePath.endsWith("syntax.template.json")) {
     return SYNTAX_TYPE;
-  } else if (templatePath.endsWith('colors.template.json')) {
+  } else if (templatePath.endsWith("colors.template.json")) {
     return NAMED_COLOR_TYPE;
   }
   return undefined;
 }
 
-
 function resolveTemplate<T, R>(
   childTemplate: T,
   templateNameToTemplate: StringDictonary<T>,
   attributeResolver: (t: T) => R,
-  parentResolver: (t: T) => string,
+  parentResolver: (t: T) => string
 ): R {
   if (!parentResolver(childTemplate)) {
     return attributeResolver(childTemplate);
@@ -69,21 +75,22 @@ function resolveTemplate<T, R>(
     );
     return {
       ...resolvedParent,
-      ...attributeResolver(childTemplate)
+      ...attributeResolver(childTemplate),
     };
   }
 }
-
 
 function resolveColor(
   color: string,
   namedColors: StringDictonary<string>
 ): string {
-  const startingTemplateIndex = color.indexOf('&');
+  const startingTemplateIndex = color.indexOf("&");
   if (startingTemplateIndex > -1) {
-    const lastDelimiterIndex = color.lastIndexOf('&');
-    const namedColor =
-      color.substring(startingTemplateIndex + 1, lastDelimiterIndex);
+    const lastDelimiterIndex = color.lastIndexOf("&");
+    const namedColor = color.substring(
+      startingTemplateIndex + 1,
+      lastDelimiterIndex
+    );
     const namedColorValue = namedColors[namedColor];
     if (!namedColorValue) {
       throw new Error(`Named color: '${namedColor}' is not present!`);
@@ -91,14 +98,16 @@ function resolveColor(
 
     // todo: check for cyclic references
     if (color === namedColorValue) {
-      throw new Error(`Very Cheeky, you set ${namedColor} to resolve to itself 😒`);
+      throw new Error(
+        `Very Cheeky, you set ${namedColor} to resolve to itself 😒`
+      );
     }
 
     const resolvedNamedColor = resolveColor(namedColorValue, namedColors);
     if (!resolvedNamedColor) {
       throw new Error(`Cannot find named color '${namedColor}'.`);
     }
-    return resolvedNamedColor + color.substring(lastDelimiterIndex + 1) || '';
+    return resolvedNamedColor + color.substring(lastDelimiterIndex + 1) || "";
   }
 
   return color;
@@ -106,20 +115,18 @@ function resolveColor(
 
 function applyNamedColors(
   objectWithNamedColors: StringDictonary<string>,
-  namedColors: StringDictonary<string>,
+  namedColors: StringDictonary<string>
 ): StringDictonary<string> {
   return Object.keys(objectWithNamedColors)
-    .map(key => {
+    .map((key) => {
       const color = objectWithNamedColors[key];
-      const resolvedColor = resolveColor(
-        color,
-        namedColors
-      );
+      const resolvedColor = resolveColor(color, namedColors);
       return {
         key,
-        value: resolvedColor
+        value: resolvedColor,
       };
-    }).reduce((accum: StringDictonary<string>, kv) => {
+    })
+    .reduce((accum: StringDictonary<string>, kv) => {
       accum[kv.key] = kv.value;
       return accum;
     }, {});
@@ -130,16 +137,16 @@ function constructNamedColorTemplate(
   dokiTemplateDefinitions: DokiThemeDefinitions
 ) {
   const lafTemplates = dokiTemplateDefinitions[NAMED_COLOR_TYPE];
-  const lafTemplate =
-    (dokiThemeTemplateJson.dark ?
-      lafTemplates.dark : lafTemplates.light);
+  const lafTemplate = dokiThemeTemplateJson.dark
+    ? lafTemplates.dark
+    : lafTemplates.light;
 
-  const resolvedColorTemplate =
-    resolveTemplate(
-      lafTemplate, lafTemplates,
-      template => template.colors,
-      template => template.extends
-    );
+  const resolvedColorTemplate = resolveTemplate(
+    lafTemplate,
+    lafTemplates,
+    (template) => template.colors,
+    (template) => template.extends
+  );
 
   const resolvedNameColors = resolveNamedColors(
     dokiTemplateDefinitions,
@@ -148,8 +155,10 @@ function constructNamedColorTemplate(
 
   // do not really need to resolve, as there are no
   // &someName& colors, but what ever.
-  const resolvedColors =
-    applyNamedColors(resolvedColorTemplate, resolvedNameColors);
+  const resolvedColors = applyNamedColors(
+    resolvedColorTemplate,
+    resolvedNameColors
+  );
   return {
     ...resolvedColors,
     ...resolvedColorTemplate,
@@ -165,99 +174,116 @@ function resolveNamedColors(
   return resolveTemplate(
     dokiThemeTemplateJson,
     colorTemplates,
-    template => template.colors,
-    // @ts-ignore
-    template => template.extends ||
-      template.dark !== undefined && (dokiThemeTemplateJson.dark ?
-        'dark' : 'light'));
+    (template) => template.colors,
+    (template) =>
+      // @ts-ignore
+      template.extends ||
+      (template.dark !== undefined &&
+        (dokiThemeTemplateJson.dark ? "dark" : "light"))
+  );
 }
 
 export interface StringDictionary<T> {
   [key: string]: T;
 }
 
-function getColorFromTemplate(templateVariables: StringDictionary<string>, templateVariable: string) {
-  const resolvedTemplateVariable = templateVariable.split('|')
-    .map(namedColor => templateVariables[namedColor])
-    .filter(Boolean)[0]
+function getColorFromTemplate(
+  templateVariables: StringDictionary<string>,
+  templateVariable: string
+) {
+  const resolvedTemplateVariable = templateVariable
+    .split("|")
+    .map((namedColor) => templateVariables[namedColor])
+    .filter(Boolean)[0];
   if (!resolvedTemplateVariable) {
-    throw Error(`Template does not have variable ${templateVariable}`)
+    throw Error(`Template does not have variable ${templateVariable}`);
   }
 
   return resolvedTemplateVariable;
 }
 
-
 function resolveTemplateVariable(
   templateVariable: string,
-  templateVariables: StringDictionary<string>,
+  templateVariables: StringDictionary<string>
 ): string {
-  const isToRGB = templateVariable.startsWith('^');
+  const isToRGB = templateVariable.startsWith("^");
   const cleanTemplateVariable = templateVariable.substr(isToRGB ? 1 : 0);
-  const hexColor = resolveColor(getColorFromTemplate(templateVariables, cleanTemplateVariable), templateVariables);
+  const hexColor = resolveColor(
+    getColorFromTemplate(templateVariables, cleanTemplateVariable),
+    templateVariables
+  );
   return hexColor;
 }
 
-
 function fillInTemplateScript(
   templateToFillIn: string,
-  templateVariables: StringDictionary<any>,
+  templateVariables: StringDictionary<any>
 ) {
-  return templateToFillIn.split('\n')
-    .map(line => {
-      const reduce = line.split("").reduce((accum, next) => {
-        if (accum.currentTemplate) {
-          if (next === '}' && accum.currentTemplate.endsWith('}')) {
-            // evaluate Template
-            const templateVariable = accum.currentTemplate.substring(2, accum.currentTemplate.length - 1)
-            accum.currentTemplate = ''
-            const resolvedTemplateVariable = resolveTemplateVariable(
-              templateVariable,
-              templateVariables
-            )
-            accum.line += resolvedTemplateVariable
+  return templateToFillIn
+    .split("\n")
+    .map((line) => {
+      const reduce = line.split("").reduce(
+        (accum, next) => {
+          if (accum.currentTemplate) {
+            if (next === "}" && accum.currentTemplate.endsWith("}")) {
+              // evaluate Template
+              const templateVariable = accum.currentTemplate.substring(
+                2,
+                accum.currentTemplate.length - 1
+              );
+              accum.currentTemplate = "";
+              const resolvedTemplateVariable = resolveTemplateVariable(
+                templateVariable,
+                templateVariables
+              );
+              accum.line += resolvedTemplateVariable;
+            } else {
+              accum.currentTemplate += next;
+            }
+          } else if (next === "{" && !accum.stagingTemplate) {
+            accum.stagingTemplate = next;
+          } else if (accum.stagingTemplate && next === "{") {
+            accum.stagingTemplate = "";
+            accum.currentTemplate = "{{";
+          } else if (accum.stagingTemplate) {
+            accum.line += accum.stagingTemplate + next;
+            accum.stagingTemplate = "";
           } else {
-            accum.currentTemplate += next
+            accum.line += next;
           }
-        } else if (next === '{' && !accum.stagingTemplate) {
-          accum.stagingTemplate = next
-        } else if (accum.stagingTemplate && next === '{') {
-          accum.stagingTemplate = '';
-          accum.currentTemplate = '{{';
-        } else if (accum.stagingTemplate) {
-          accum.line += accum.stagingTemplate + next;
-          accum.stagingTemplate = ''
-        } else {
-          accum.line += next;
-        }
 
-        return accum;
-      }, {
-        currentTemplate: '',
-        stagingTemplate: '',
-        line: '',
-      });
+          return accum;
+        },
+        {
+          currentTemplate: "",
+          stagingTemplate: "",
+          line: "",
+        }
+      );
       return reduce.line + reduce.stagingTemplate || reduce.currentTemplate;
-    }).join('\n');
+    })
+    .join("\n");
 }
 
 // todo: dis
 type DokiThemeJupyter = {
-  [k: string]: any
-}
+  [k: string]: any;
+};
 
 function buildNamedColors(
   dokiThemeDefinition: MasterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
-  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition,
+  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition
 ): DokiThemeJupyter {
   const namedColors = constructNamedColorTemplate(
-    dokiThemeDefinition, dokiTemplateDefinitions
-  )
-  const colorsOverride = dokiThemeJupyterDefinition.overrides.theme?.colors || {};
+    dokiThemeDefinition,
+    dokiTemplateDefinitions
+  );
+  const colorsOverride =
+    dokiThemeJupyterDefinition.overrides.theme?.colors || {};
   return {
     ...namedColors,
-    ...colorsOverride
+    ...colorsOverride,
   };
 }
 
@@ -265,72 +291,72 @@ function createDokiTheme(
   dokiFileDefinitionPath: string,
   dokiThemeDefinition: MasterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
-  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition,
+  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition
 ) {
   try {
     return {
       path: dokiFileDefinitionPath,
       definition: dokiThemeDefinition,
-      stickers: getStickers(
-        dokiThemeDefinition,
-        dokiFileDefinitionPath
-      ),
+      stickers: getStickers(dokiThemeDefinition, dokiFileDefinitionPath),
       namedColors: buildNamedColors(
         dokiThemeDefinition,
         dokiTemplateDefinitions,
-        dokiThemeJupyterDefinition,
+        dokiThemeJupyterDefinition
       ),
       theme: {},
-      jupyterDefinition: dokiThemeJupyterDefinition
+      jupyterDefinition: dokiThemeJupyterDefinition,
     };
   } catch (e) {
-    throw new Error(`Unable to build ${dokiThemeDefinition.name}'s theme for reasons ${e}`);
+    throw new Error(
+      `Unable to build ${dokiThemeDefinition.name}'s theme for reasons ${e}`
+    );
   }
 }
 
 const readJson = <T>(jsonPath: string): T =>
-  JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+  JSON.parse(fs.readFileSync(jsonPath, "utf-8"));
 
 type TemplateTypes = StringDictonary<StringDictonary<string>>;
 
-const isTemplate = (filePath: string): boolean =>
-  !!getTemplateType(filePath);
+const isTemplate = (filePath: string): boolean => !!getTemplateType(filePath);
 
 const readTemplates = (templatePaths: string[]): TemplateTypes => {
   return templatePaths
     .filter(isTemplate)
-    .map(templatePath => {
+    .map((templatePath) => {
       return {
         type: getTemplateType(templatePath)!!,
-        template: readJson<any>(templatePath)
+        template: readJson<any>(templatePath),
       };
     })
-    .reduce((accum: TemplateTypes, templateRepresentation) => {
-      accum[templateRepresentation.type][templateRepresentation.template.name] =
-        templateRepresentation.template;
-      return accum;
-    }, {
-      [SYNTAX_TYPE]: {},
-      [LAF_TYPE]: {},
-      [NAMED_COLOR_TYPE]: {},
-    });
+    .reduce(
+      (accum: TemplateTypes, templateRepresentation) => {
+        accum[templateRepresentation.type][
+          templateRepresentation.template.name
+        ] = templateRepresentation.template;
+        return accum;
+      },
+      {
+        [SYNTAX_TYPE]: {},
+        [LAF_TYPE]: {},
+        [NAMED_COLOR_TYPE]: {},
+      }
+    );
 };
 
-function resolveStickerPath(
-  themeDefinitionPath: string,
-  sticker: string,
-) {
+function resolveStickerPath(themeDefinitionPath: string, sticker: string) {
   const stickerPath = path.resolve(
-    path.resolve(themeDefinitionPath, '..'),
+    path.resolve(themeDefinitionPath, ".."),
     sticker
   );
-  return stickerPath.substr(masterThemeDefinitionDirectoryPath.length + '/definitions'.length);
+  return stickerPath.substr(
+    masterThemeDefinitionDirectoryPath.length + "/definitions".length
+  );
 }
-
 
 const getStickers = (
   dokiDefinition: MasterDokiThemeDefinition,
-  themePath: string,
+  themePath: string
 ) => {
   const secondary =
     dokiDefinition.stickers.secondary || dokiDefinition.stickers.normal;
@@ -341,30 +367,34 @@ const getStickers = (
     },
     ...(secondary
       ? {
-        secondary: {
-          path: resolveStickerPath(themePath, secondary),
-          name: secondary,
-        },
-      }
+          secondary: {
+            path: resolveStickerPath(themePath, secondary),
+            name: secondary,
+          },
+        }
       : {}),
   };
 };
 
-console.log('Preparing to generate themes.');
+console.log("Preparing to generate themes.");
 
-type DokiTheme = { path: string; namedColors: DokiThemeJupyter; definition: MasterDokiThemeDefinition; stickers: { default: { path: string; name: string } }; theme: {} };
+type DokiTheme = {
+  path: string;
+  namedColors: DokiThemeJupyter;
+  definition: MasterDokiThemeDefinition;
+  stickers: { default: { path: string; name: string } };
+  theme: {};
+};
 
 function getGroupName(dokiTheme: DokiTheme) {
   return GroupToNameMapping[dokiTheme.definition.group];
 }
 
 function getDisplayName(dokiTheme: DokiTheme) {
-  return `${(getGroupName(dokiTheme))}${dokiTheme.definition.name}`;
+  return `${getGroupName(dokiTheme)}${dokiTheme.definition.name}`;
 }
 
-
-const themesDirectory = path.resolve(repoDirectory, 'plugin-source', 'themes');
-
+const themesDirectory = path.resolve(repoDirectory, "dokitheme");
 
 walkDir(jupyterDefinitionDirectoryPath)
   .then((files) =>
@@ -376,38 +406,43 @@ walkDir(jupyterDefinitionDirectoryPath)
         .map((dokiThemeJupyterDefinitionPath) =>
           readJson<JupyterDokiThemeDefinition>(dokiThemeJupyterDefinitionPath)
         )
-        .reduce(
-          (accum: StringDictonary<JupyterDokiThemeDefinition>, def) => {
-            accum[def.id] = def;
-            return accum;
-          },
-          {}
-        ),
+        .reduce((accum: StringDictonary<JupyterDokiThemeDefinition>, def) => {
+          accum[def.id] = def;
+          return accum;
+        }, {}),
     };
-  }).then(({dokiThemeJupyterDefinitions}) =>
-  walkDir(path.resolve(masterThemeDefinitionDirectoryPath, 'templates'))
-    .then(readTemplates)
-    .then(dokiTemplateDefinitions => {
-      return walkDir(path.resolve(masterThemeDefinitionDirectoryPath, 'definitions'))
-        .then(files => files.filter(file => file.endsWith('master.definition.json')))
-        .then(dokiFileDefinitionPaths => {
-          return {
-            dokiThemeJupyterDefinitions,
-            dokiTemplateDefinitions,
-            dokiFileDefinitionPaths
-          };
-        });
-    }))
-  .then(templatesAndDefinitions => {
+  })
+  .then(({ dokiThemeJupyterDefinitions }) =>
+    walkDir(path.resolve(masterThemeDefinitionDirectoryPath, "templates"))
+      .then(readTemplates)
+      .then((dokiTemplateDefinitions) => {
+        return walkDir(
+          path.resolve(masterThemeDefinitionDirectoryPath, "definitions")
+        )
+          .then((files) =>
+            files.filter((file) => file.endsWith("master.definition.json"))
+          )
+          .then((dokiFileDefinitionPaths) => {
+            return {
+              dokiThemeJupyterDefinitions,
+              dokiTemplateDefinitions,
+              dokiFileDefinitionPaths,
+            };
+          });
+      })
+  )
+  .then((templatesAndDefinitions) => {
     const {
       dokiTemplateDefinitions,
       dokiThemeJupyterDefinitions,
-      dokiFileDefinitionPaths
+      dokiFileDefinitionPaths,
     } = templatesAndDefinitions;
 
     return dokiFileDefinitionPaths
-      .map(dokiFileDefinitionPath => {
-        const dokiThemeDefinition = readJson<MasterDokiThemeDefinition>(dokiFileDefinitionPath);
+      .map((dokiFileDefinitionPath) => {
+        const dokiThemeDefinition = readJson<MasterDokiThemeDefinition>(
+          dokiFileDefinitionPath
+        );
         const dokiThemeJupyterDefinition =
           dokiThemeJupyterDefinitions[dokiThemeDefinition.id];
         if (!dokiThemeJupyterDefinition) {
@@ -415,46 +450,47 @@ walkDir(jupyterDefinitionDirectoryPath)
             `${dokiThemeDefinition.displayName}'s theme does not have a Jupyter Definition!!`
           );
         }
-        return ({
+        return {
           dokiFileDefinitionPath,
           dokiThemeDefinition,
           dokiThemeJupyterDefinition,
-        });
+        };
       })
-      .filter(pathAndDefinition =>
-        (pathAndDefinition.dokiThemeDefinition.product === 'ultimate' &&
-          process.env.PRODUCT === 'ultimate') ||
-        pathAndDefinition.dokiThemeDefinition.product !== 'ultimate'
+      .filter(
+        (pathAndDefinition) =>
+          (pathAndDefinition.dokiThemeDefinition.product === "ultimate" &&
+            process.env.PRODUCT === "ultimate") ||
+          pathAndDefinition.dokiThemeDefinition.product !== "ultimate"
       )
-      .map(({
-              dokiFileDefinitionPath,
-              dokiThemeDefinition,
-              dokiThemeJupyterDefinition,
-            }) =>
-        createDokiTheme(
+      .map(
+        ({
           dokiFileDefinitionPath,
           dokiThemeDefinition,
-          dokiTemplateDefinitions,
           dokiThemeJupyterDefinition,
-        )
+        }) =>
+          createDokiTheme(
+            dokiFileDefinitionPath,
+            dokiThemeDefinition,
+            dokiTemplateDefinitions,
+            dokiThemeJupyterDefinition
+          )
       );
   })
-  .then(dokiThemes => {
-    console.log(dokiThemes);
-    
-    // fs.writeFileSync(path.resolve(themesDirectory, 'themes.json'),
-    //   JSON.stringify(dokiThemes.reduce((accum, dokiTheme) => ({
-    //     ...accum,
-    //     [dokiTheme.definition.id]: {
-    //       id: dokiTheme.definition.id,
-    //       displayName: getDisplayName(dokiTheme),
-    //       stickers: dokiTheme.stickers,
-    //       isDark: dokiTheme.definition.dark,
-    //     }
-    //   }), {}), null, 2), {
-    //     encoding: 'utf-8',
-    //   })
+  .then((dokiThemes) => {
+    fs.writeFileSync(
+      path.resolve(themesDirectory, "themes.py"),
+      `themes = ${JSON.stringify(
+        dokiThemes.map((dokiTheme) => getDisplayName(dokiTheme)).sort(
+          (a, b) => a.localeCompare(b)
+        ),
+        null,
+        2
+      )}`,
+      {
+        encoding: "utf-8",
+      }
+    );
   })
   .then(() => {
-    console.log('Theme Generation Complete!');
+    console.log("Theme Generation Complete!");
   });
