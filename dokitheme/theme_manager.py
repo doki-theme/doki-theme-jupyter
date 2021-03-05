@@ -1,4 +1,4 @@
-from theme_janitor import remove_theme_artifiacts
+from theme_janitor import remove_theme_artifacts
 from themes import themes
 from theme_installer import install_theme_styles
 
@@ -12,7 +12,10 @@ def list_themes():
 
 
 def remove_theme():
-    remove_theme_artifiacts()
+    remove_theme_artifacts()
+    print("""
+    Removed themes, see you later friend!\nRefresh your browser to see changes.
+    """.strip())
 
 
 def install_theme(theme_parameter):
@@ -30,4 +33,5 @@ def install_theme(theme_parameter):
 
     install_theme_styles(themes[theme_parameter])
 
+    print("I installed \"{}\" refresh your browser to see changes!".format(theme_parameter))
     return 0

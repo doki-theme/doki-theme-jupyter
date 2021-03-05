@@ -2,11 +2,11 @@ import os
 from shutil import copyfile
 
 from constants import jupyter_custom_config_path, jupyter_nbext_path, default_css_path, \
-    jupyter_customcss_path, jupyter_customjs_path, default_js_path, current_theme_path, jupyter_home_path, \
-    jupyter_custom_fonts_path, jupyter_data_path
+    jupyter_customcss_path, jupyter_customjs_path, default_js_path, current_theme_path, jupyter_custom_fonts_path
+from file_system_tools import ensure_directories_exist
 
 
-def remove_theme_artifiacts():
+def remove_theme_artifacts():
     """Remove custom.css and custom fonts"""
     paths = [jupyter_custom_config_path, jupyter_nbext_path]
 
@@ -27,23 +27,6 @@ def remove_theme_artifiacts():
 
     if os.path.exists(current_theme_path):
         os.remove(current_theme_path)
-
-    print("""
-    Removed themes, see you later friend!\nRefresh your browser to see changes.
-    """.strip())
-
-
-def ensure_directories_exist():
-    if not os.path.isdir(jupyter_home_path):
-        os.makedirs(jupyter_home_path)
-    if not os.path.isdir(jupyter_custom_config_path):
-        os.makedirs(jupyter_custom_config_path)
-    if not os.path.isdir(jupyter_custom_fonts_path):
-        os.makedirs(jupyter_custom_fonts_path)
-    if not os.path.isdir(jupyter_data_path):
-        os.makedirs(jupyter_data_path)
-    if not os.path.isdir(jupyter_nbext_path):
-        os.makedirs(jupyter_nbext_path)
 
 
 def delete_font_files():
