@@ -15,12 +15,20 @@ def get_doki_theme(theme_id):
 
 def create_theme_styles(doki_theme):
     return """
-    :root {
-        --jp-layout-color1: red;
-    }
-    #jupyter-main-app {
-    position: relative;
-    background-color: red;
+body::before {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    z-index: 9001;
+    width: 100%;
+    height: 100%;
+    background-position: 100% 100%;
+    background-image: url("https://doki.assets.unthrottled.io/stickers/jetbrains/v2/franxx/zeroTwo/dark/zero_two_dark.png");
+    background-repeat: no-repeat;
+    opacity: 1;
+}
+#notebook-container {
+  margin-bottom: 10rem;
 }
     """
 
