@@ -30,7 +30,7 @@ body::before {
 #notebook-container {
   margin-bottom: 10rem;
 }
-* { 
+.CodeMirror-scroll, .container, #notebook, #header-container { 
   background-image: url('https://doki.assets.unthrottled.io/backgrounds/wallpapers/transparent/zero_two_dark.png') !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
