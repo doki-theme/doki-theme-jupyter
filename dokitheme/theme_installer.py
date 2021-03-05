@@ -30,6 +30,13 @@ body::before {
 #notebook-container {
   margin-bottom: 10rem;
 }
+* { 
+  background-image: url('https://doki.assets.unthrottled.io/backgrounds/wallpapers/transparent/zero_two_dark.png') !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-position: center !important; 
+  background-size: cover !important;
+}
     """
 
 
