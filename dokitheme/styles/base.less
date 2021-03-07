@@ -11,7 +11,6 @@ body::before {
   background-repeat: no-repeat;
   opacity: 1;
 }
-
 */
 
 #notebook-container {
@@ -33,6 +32,6 @@ body::before {
   background-image: url(@wallpaper) !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
-  background-position: center !important;
+  background-position: @wallpaper-anchor !important;
   background-size: cover !important;
 }

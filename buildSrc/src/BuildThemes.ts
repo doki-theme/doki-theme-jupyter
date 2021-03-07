@@ -277,7 +277,7 @@ type DokiThemeJupyter = {
   [k: string]: any;
 };
 
-function buildNamedColors(
+function buildTemplateVariables(
   dokiThemeDefinition: MasterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
   dokiThemeJupyterDefinition: JupyterDokiThemeDefinition
@@ -291,6 +291,8 @@ function buildNamedColors(
   return {
     ...namedColors,
     ...colorsOverride,
+    stickerName: dokiThemeDefinition.stickers.default,
+    anchor: dokiThemeJupyterDefinition.backgrounds?.default?.anchor || 'center',
   };
 }
 
@@ -305,7 +307,7 @@ function createDokiTheme(
       path: dokiFileDefinitionPath,
       definition: dokiThemeDefinition,
       stickers: getStickers(dokiThemeDefinition, dokiFileDefinitionPath),
-      namedColors: buildNamedColors(
+      templateVariables: buildTemplateVariables(
         dokiThemeDefinition,
         dokiTemplateDefinitions,
         dokiThemeJupyterDefinition
@@ -387,7 +389,7 @@ console.log("Preparing to generate themes.");
 
 type DokiTheme = {
   path: string;
-  namedColors: DokiThemeJupyter;
+  templateVariables: DokiThemeJupyter;
   definition: MasterDokiThemeDefinition;
   stickers: { default: { path: string; name: string } };
   theme: {};
@@ -496,10 +498,7 @@ walkDir(jupyterDefinitionDirectoryPath)
     dokiThemes.forEach(dokiTheme => {
       fs.writeFileSync(path.resolve(themesLessDirectory, `${
         dokiTheme.definition.id
-      }.less`), fillInTemplateScript(lessTemplate, {
-        ...dokiTheme.namedColors,
-        stickerName: dokiTheme.stickers.default.name,
-      }), {
+      }.less`), fillInTemplateScript(lessTemplate, dokiTheme.templateVariables), {
         encoding: "utf-8",
       })
     });

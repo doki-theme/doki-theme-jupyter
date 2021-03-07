@@ -33,6 +33,15 @@ export interface Stickers {
   normal?: string;
 }
 
+interface BackgroundPositioning {
+  anchor: string;
+}
+
+interface BackgroundPositionings {
+  default?: BackgroundPositioning;
+  secondary?: BackgroundPositioning;
+}
+
 export interface JupyterDokiThemeDefinition {
   id: string;
   overrides: {
@@ -47,6 +56,7 @@ export interface JupyterDokiThemeDefinition {
     extends: string;
     ui: StringDictonary<string>;
   };
+  backgrounds?: BackgroundPositionings;
   syntax: {};
   colors: {};
 }
