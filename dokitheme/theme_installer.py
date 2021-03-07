@@ -1,38 +1,31 @@
-import sys, os
+import os
+import sys
+from tempfile import mkstemp
 
 import lesscpy
-from tempfile import mkstemp
+
 from constants import jupyter_customcss_path, styles_dir
-from theme_janitor import remove_theme_artifacts
 from file_system_tools import ensure_directories_exist
+from theme_janitor import remove_theme_artifacts
+
+_, evaluated_less_file = mkstemp('.less')
 
 
-def get_doki_theme(theme_id):
-    return {
-        "colors": {
-            "fileScopeColor": "#ff0000"
-        }
-    }
-
-# path to save tempfile with style_less before reading/compiling
-_, tempfile = mkstemp('.less')
-_, vimtemp = mkstemp('.less')
-
-def create_theme_styles(doki_theme):
-    with open_file(os.path.join(styles_dir, 'base.less'), 'r') as base_styles:
+def create_theme_styles(theme_id):
+    with open_file(os.path.join(styles_dir, 'themes', theme_id + '.less'), 'r') as base_styles:
         styles = base_styles.read() + '\n'
 
-    with open_file(tempfile, 'w') as evaluated_less:
+    with open_file(os.path.join(styles_dir, 'base.less'), 'r') as base_styles:
+        styles += base_styles.read() + '\n'
+
+    with open_file(evaluated_less_file, 'w') as evaluated_less:
         evaluated_less.write(styles)
 
-    style_css = lesscpy.compile(tempfile)
-    style_css += '\n\n'
-    return style_css
+    return lesscpy.compile(evaluated_less_file) + '\n\n'
 
 
-def install_theme(theme_id):
-    doki_theme = get_doki_theme(theme_id)
-    css_string = create_theme_styles(doki_theme)
+def install_theme(theme_definition):
+    css_string = create_theme_styles(theme_definition['id'])
     write_final_css(css_string)
 
 

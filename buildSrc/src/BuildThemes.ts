@@ -22,7 +22,14 @@ const jupyterDefinitionDirectoryPath = path.resolve(
   repoDirectory,
   "buildSrc",
   "assets",
-  "templates"
+  "themes",
+);
+
+const styleTemplateDirectoryPath = path.resolve(
+  repoDirectory,
+  "buildSrc",
+  "assets",
+  "templates",
 );
 
 function walkDir(dir: string): Promise<string[]> {
@@ -333,7 +340,7 @@ const readTemplates = (templatePaths: string[]): TemplateTypes => {
       (accum: TemplateTypes, templateRepresentation) => {
         accum[templateRepresentation.type][
           templateRepresentation.template.name
-        ] = templateRepresentation.template;
+          ] = templateRepresentation.template;
         return accum;
       },
       {
@@ -367,11 +374,11 @@ const getStickers = (
     },
     ...(secondary
       ? {
-          secondary: {
-            path: resolveStickerPath(themePath, secondary),
-            name: secondary,
-          },
-        }
+        secondary: {
+          path: resolveStickerPath(themePath, secondary),
+          name: secondary,
+        },
+      }
       : {}),
   };
 };
@@ -412,7 +419,7 @@ walkDir(jupyterDefinitionDirectoryPath)
         }, {}),
     };
   })
-  .then(({ dokiThemeJupyterDefinitions }) =>
+  .then(({dokiThemeJupyterDefinitions}) =>
     walkDir(path.resolve(masterThemeDefinitionDirectoryPath, "templates"))
       .then(readTemplates)
       .then((dokiTemplateDefinitions) => {
@@ -464,10 +471,10 @@ walkDir(jupyterDefinitionDirectoryPath)
       )
       .map(
         ({
-          dokiFileDefinitionPath,
-          dokiThemeDefinition,
-          dokiThemeJupyterDefinition,
-        }) =>
+           dokiFileDefinitionPath,
+           dokiThemeDefinition,
+           dokiThemeJupyterDefinition,
+         }) =>
           createDokiTheme(
             dokiFileDefinitionPath,
             dokiThemeDefinition,
@@ -477,12 +484,32 @@ walkDir(jupyterDefinitionDirectoryPath)
       );
   })
   .then((dokiThemes) => {
+    // write less files from template
+    const lessTemplate = fs.readFileSync(
+      path.resolve(styleTemplateDirectoryPath, 'theme.less.template'), {
+        encoding: "utf-8",
+      });
+    const themesLessDirectory = path.resolve(themesDirectory, "styles", "themes");
+    if(!fs.existsSync(themesLessDirectory)) {
+      fs.mkdirSync(themesLessDirectory);
+    }
+    dokiThemes.forEach(dokiTheme => {
+      fs.writeFileSync(path.resolve(themesLessDirectory, `${
+        dokiTheme.definition.id
+      }.less`), fillInTemplateScript(lessTemplate, {
+        ...dokiTheme.namedColors,
+        stickerName: dokiTheme.stickers.default.name,
+      }), {
+        encoding: "utf-8",
+      })
+    });
+
     fs.writeFileSync(
       path.resolve(themesDirectory, "themes.py"),
       `themes = ${JSON.stringify(
         dokiThemes.reduce((accum, dokiTheme) => ({
           ...accum,
-          [getDisplayName(dokiTheme)] : {
+          [getDisplayName(dokiTheme)]: {
             id: dokiTheme.definition.id,
           }
         }), {}),
