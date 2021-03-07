@@ -23,15 +23,25 @@ body::before {
     width: 100%;
     height: 100%;
     background-position: 100% 100%;
-    background-image: url("https://doki.assets.unthrottled.io/stickers/jetbrains/v2/franxx/zeroTwo/dark/zero_two_dark.png");
+    background-image: url("https://doki.assets.unthrottled.io/stickers/jetbrains/v2/franxx/zeroTwo/dark/zero_two_dark.png")
     background-repeat: no-repeat;
     opacity: 1;
 }
 #notebook-container {
   margin-bottom: 10rem;
 }
-.CodeMirror-scroll, .container, #notebook, #header-container { 
-  background-image: url('https://doki.assets.unthrottled.io/backgrounds/wallpapers/transparent/zero_two_dark.png') !important;
+
+#maintoolbar-container {
+    background: none !important;
+}
+
+.CodeMirror-scroll, 
+.container, 
+#notebook, 
+#header-container,
+.navbar-collapse
+{ 
+  background-image: url('https://doki.assets.unthrottled.io/backgrounds/wallpapers/transparent/zero_two_light.png') !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
   background-position: center !important; 
