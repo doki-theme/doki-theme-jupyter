@@ -1,6 +1,8 @@
-import sys
+import sys, os
 
-from constants import jupyter_customcss_path
+import lesscpy
+from tempfile import mkstemp
+from constants import jupyter_customcss_path, styles_dir
 from theme_janitor import remove_theme_artifacts
 from file_system_tools import ensure_directories_exist
 
@@ -12,42 +14,20 @@ def get_doki_theme(theme_id):
         }
     }
 
+# path to save tempfile with style_less before reading/compiling
+_, tempfile = mkstemp('.less')
+_, vimtemp = mkstemp('.less')
 
 def create_theme_styles(doki_theme):
-    return """
-body::before {
-    content: '';
-    pointer-events: none;
-    position: absolute;
-    z-index: 9001;
-    width: 100%;
-    height: 100%;
-    background-position: 100% 100%;
-    background-image: url("https://doki.assets.unthrottled.io/stickers/jetbrains/v2/franxx/zeroTwo/dark/zero_two_dark.png")
-    background-repeat: no-repeat;
-    opacity: 1;
-}
-#notebook-container {
-  margin-bottom: 10rem;
-}
+    with open_file(os.path.join(styles_dir, 'base.less'), 'r') as base_styles:
+        styles = base_styles.read() + '\n'
 
-#maintoolbar-container {
-    background: none !important;
-}
+    with open_file(tempfile, 'w') as evaluated_less:
+        evaluated_less.write(styles)
 
-.CodeMirror-scroll, 
-.container, 
-#notebook, 
-#header-container,
-.navbar-collapse
-{ 
-  background-image: url('https://doki.assets.unthrottled.io/backgrounds/wallpapers/transparent/zero_two_light.png') !important;
-  background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
-  background-position: center !important; 
-  background-size: cover !important;
-}
-    """
+    style_css = lesscpy.compile(tempfile)
+    style_css += '\n\n'
+    return style_css
 
 
 def install_theme(theme_id):

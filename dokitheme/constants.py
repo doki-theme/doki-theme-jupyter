@@ -1,5 +1,4 @@
 import os
-from tempfile import mkstemp
 
 from jupyter_core.paths import jupyter_config_dir, jupyter_data_dir
 
@@ -8,9 +7,6 @@ local_package_path = os.path.dirname(os.path.realpath(__file__))
 
 user_config_path = os.path.join(os.path.expanduser('~'), '.doki-theme-jupyter')
 
-# path to save tempfile with style_less before reading/compiling
-_, tempfile = mkstemp('.less')
-_, vimtemp = mkstemp('.less')
 
 # path to install custom.css file (~/.jupyter/custom/)
 jupyter_home_path = jupyter_config_dir()

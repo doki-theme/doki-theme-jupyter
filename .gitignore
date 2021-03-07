@@ -29,3 +29,4 @@ masterThemes/
 .ipynb_checkpoints/
 
 dokitheme/themes.py
+dokitheme/styles/themes
