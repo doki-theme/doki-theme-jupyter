@@ -16,7 +16,9 @@ div, p, body, div, span {
 .container,
 #notebook,
 #header,
-.navbar-collapse
+.navbar-collapse,
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected
 {
   background-image: url(@wallpaper) !important;
   background-repeat: no-repeat !important;
@@ -91,11 +93,11 @@ div.out_prompt_overlay:hover {
   border: none;
 }
 
-.btn-group {
+.btn-group, .toolbar select {
   color: @button-font;
 }
 
-.btn-default {
+.btn-default, .toolbar select {
   background: @button-color;
   border: none;
 }
