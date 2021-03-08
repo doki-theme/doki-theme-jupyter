@@ -1,10 +1,5 @@
 // @ts-ignore
-import {
-  DokiThemeDefinitions,
-  JupyterDokiThemeDefinition,
-  MasterDokiThemeDefinition,
-  StringDictonary,
-} from "./types";
+import {DokiThemeDefinitions, JupyterDokiThemeDefinition, MasterDokiThemeDefinition, StringDictonary,} from "./types";
 import GroupToNameMapping from "./GroupMappings";
 
 const path = require("path");
@@ -277,19 +272,42 @@ type DokiThemeJupyter = {
   [k: string]: any;
 };
 
+function hexToRGBA(hex) {
+  const hexValue = parseInt(hex.substring(1), 16);
+  return 'rgba(' + [
+    (hexValue >> 8) & 255,
+    (hexValue >> 4) & 255,
+    (hexValue >> 2) & 255,
+    hexValue & 255
+  ].join(',') + ')';
+}
+
+
+function sanitizeColor(colorValue: string): string {
+  if (colorValue.startsWith('#') && colorValue.length > 7) {
+    return hexToRGBA(colorValue);
+  }
+  return colorValue;
+}
+
 function buildTemplateVariables(
   dokiThemeDefinition: MasterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
   dokiThemeJupyterDefinition: JupyterDokiThemeDefinition
 ): DokiThemeJupyter {
-  const namedColors = constructNamedColorTemplate(
+  const namedColors: StringDictionary<string> = constructNamedColorTemplate(
     dokiThemeDefinition,
     dokiTemplateDefinitions
   );
   const colorsOverride =
     dokiThemeJupyterDefinition.overrides.theme?.colors || {};
+  const cleanedColors = Object.entries(namedColors)
+    .reduce((accum, [colorName, colorValue]) => ({
+      ...accum,
+      [colorName]: sanitizeColor(colorValue),
+    }), {});
   return {
-    ...namedColors,
+    ...cleanedColors,
     ...colorsOverride,
     stickerName: dokiThemeDefinition.stickers.default,
     anchor: dokiThemeJupyterDefinition.backgrounds?.default?.anchor || 'center',
@@ -492,7 +510,7 @@ walkDir(jupyterDefinitionDirectoryPath)
         encoding: "utf-8",
       });
     const themesLessDirectory = path.resolve(themesDirectory, "styles", "themes");
-    if(!fs.existsSync(themesLessDirectory)) {
+    if (!fs.existsSync(themesLessDirectory)) {
       fs.mkdirSync(themesLessDirectory);
     }
     dokiThemes.forEach(dokiTheme => {
