@@ -1,2 +1,14 @@
 @wallpaper: 'https://doki.assets.unthrottled.io/backgrounds/wallpapers/transparent/{{stickerName}}';
 @wallpaper-anchor: {{anchor}};
+@base-background: {{baseBackground}};
+@header-color: {{headerColor}};
+@text-editor-background: {{textEditorBackground}};
+@border-color: {{borderColor}};
+@accent-color: {{accentColor}};
+@caret-row: {{caretRow}};
+@code-block: {{codeBlock}};
+@highlight-color: {{highlightColor}};
+@foreground-color: {{foregroundColor}};
+@button-font: {{buttonFont}};
+@button-color: {{buttonColor}};
+@info-foreground: {{infoForeground}};

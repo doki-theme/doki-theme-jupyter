@@ -1,3 +1,6 @@
+div, p, body, div, span {
+  color: @foreground-color;
+}
 
 #notebook-container {
   margin-bottom: 10rem;
@@ -20,4 +23,88 @@
   background-attachment: fixed !important;
   background-position: @wallpaper-anchor !important;
   background-size: cover !important;
+}
+
+#ipython-main-app, #notebook {
+  background-color: @base-background;
+}
+
+.notebook_app > #header,
+ #notebook > .container
+{
+  background-color: @header-color;
+  box-shadow: none;
+}
+
+div.input_area {
+  background-color: @text-editor-background;
+  border: none;
+}
+
+.navbar-default .navbar-nav > li > a,
+.notification_trusted,
+#kernel_indicator .kernel_indicator_name,
+#kernel_indicator,
+.notification_widget > span
+{
+  color: @info-foreground;
+}
+
+body > #header .header-bar {
+  background: @border-color;
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form,
+#kernel_indicator
+{
+  border-color: @border-color;
+}
+
+#kernel_indicator {
+  border-left-width: 2px;
+}
+
+#menubar .navbar {
+  background-color: @header-color;
+  border: none;
+}
+
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  background: @accent-color;
+}
+
+div.cell.selected, div.cell.selected.jupyter-soft-selected {
+  border: none;
+  background: @code-block;
+}
+
+div.out_prompt_overlay:hover {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: @code-block;
+}
+
+.notification_widget {
+  background: @highlight-color;
+  border: none;
+}
+
+.btn-group {
+  color: @button-font;
+}
+
+.btn-default {
+  background: @button-color;
+  border: none;
+}
+
+.btn-default:hover {
+  background: @highlight-color;
+}
+
+button > i,
+.toolbar-btn-label {
+  color: @button-font;
 }
