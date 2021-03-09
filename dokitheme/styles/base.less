@@ -1,8 +1,14 @@
 div, p, body, div, span,
 .form-control,
-.dropdown-menu > li > a
+.dropdown-menu > li > a,
+.typeahead-dropdown>li>a,
+.typeahead-list>li>a
 {
   color: @foreground-color;
+}
+
+* {
+  caret-color: @accent-color;
 }
 
 *:focus {
@@ -34,6 +40,7 @@ div.cell.selected.jupyter-soft-selected
   background-size: cover !important;
 }
 
+.typeahead-container.result .typeahead-list,
 #ipython-main-app, #notebook {
   background-color: @base-background;
 }
@@ -45,6 +52,8 @@ div.cell.selected.jupyter-soft-selected
   box-shadow: none;
 }
 
+.typeahead-field input:last-child,
+.typeahead-hint,
 input,
 .form-control {
   background-color: @secondary-background;
@@ -73,7 +82,8 @@ div.input_area {
 .notification_widget > span,
 .filename,
 .checkpoint_status,
-.autosave_status
+.autosave_status,
+.command-shortcut:before
 {
   color: @info-foreground;
 }
@@ -86,6 +96,7 @@ body > #header .header-bar
 
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form,
+.typeahead-field input:last-child, .typeahead-hint,
 #kernel_indicator,
 .modal-header,
 .modal-footer,
@@ -108,6 +119,12 @@ div.cell.selected:before,
 div.cell.selected.jupyter-soft-selected:before {
   background: @accent-color;
 }
+
+//Caret Color
+.cm-s-ipython .CodeMirror-cursor {
+  border-left: 2px solid @accent-color !important;
+}
+
 
 div.cell.selected, div.cell.selected.jupyter-soft-selected {
   border: none;
@@ -133,15 +150,42 @@ div.out_prompt_overlay:hover {
   color: @button-font;
 }
 
+.typeahead-list>li.typeahead-group.active>a,
+.typeahead-list>li.typeahead-group>a,
+.typeahead-list>li.typeahead-group>a:focus,
+.typeahead-list>li.typeahead-group>a:hover
+{
+  color: @info-foreground;
+  background-color: @caret-row;
+}
+
+.typeahead-dropdown>li.active>a,
+.typeahead-dropdown>li>a:focus,
+.typeahead-dropdown>li>a:hover,
+.typeahead-list>li.active>a,
+.typeahead-list>li>a:focus,
+.typeahead-list>li>a:hover,
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
+.cm-s-ipython div.CodeMirror-selected, // code selection background
 .btn-primary,
 .btn-primary .btn-default {
   color: @selection-foreground !important;
   background-color: @selection-background !important;
 }
 
-.btn-default, .toolbar select {
+.typeahead-search-icon {
+  background: none;
+}
+
+.typeahead-search-icon:after {
+  content: 'search';
+  color: @button-font
+}
+
+.typeahead-container button,
+.typeahead-button,
+.btn-default, .toolbar select, button {
   background: @button-color;
   border: none;
 }
@@ -158,7 +202,10 @@ div.out_prompt_overlay:hover {
 .btn-group:focus,
 button:hover,
 button:active,
-button:focus
+button:focus,
+.typeahead-container button:hover,
+.typeahead-container button:active,
+.typeahead-container button:focus
 {
   color: @button-font;
   background: @highlight-color;
@@ -171,6 +218,7 @@ button > i,
   color: @button-font;
 }
 
+kbd,
 div.input_prompt {
   color: @line-number-color;
 }
