@@ -12,3 +12,10 @@
 @button-font: {{buttonFont}};
 @button-color: {{buttonColor}};
 @info-foreground: {{infoForeground}};
+@selection-foreground: {{selectionForeground}};
+@line-number-color: {{lineNumberColor}};
+@diff-inserted: {{diff.inserted}};
+@test-scope-color: {{testScopeColor}};
+@keyword-color: {{keywordColor}};
+@html-tag-color: {{htmlTagColor}};
+@string-color: {{stringColor}};

@@ -2,6 +2,10 @@ div, p, body, div, span {
   color: @foreground-color;
 }
 
+*:focus {
+  outline: none;
+}
+
 #notebook-container {
   margin-bottom: 10rem;
 }
@@ -43,11 +47,19 @@ div.input_area {
   border: none;
 }
 
+.navbar-default .navbar-nav > li > a:hover {
+  color: @info-foreground;
+  background-color: @highlight-color;
+}
+
 .navbar-default .navbar-nav > li > a,
 .notification_trusted,
 #kernel_indicator .kernel_indicator_name,
 #kernel_indicator,
-.notification_widget > span
+.notification_widget > span,
+.filename,
+.checkpoint_status,
+.autosave_status
 {
   color: @info-foreground;
 }
@@ -89,8 +101,12 @@ div.out_prompt_overlay:hover {
 }
 
 .notification_widget {
-  background: @highlight-color;
+  background: @code-block;
   border: none;
+}
+
+.notification_widget:hover {
+  background: @highlight-color;
 }
 
 .btn-group, .toolbar select {
@@ -102,11 +118,62 @@ div.out_prompt_overlay:hover {
   border: none;
 }
 
-.btn-default:hover {
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus,
+.btn-group:focus,
+button:hover,
+button:active,
+button:focus
+{
   background: @highlight-color;
+  border: none;
+  outline: none;
 }
 
 button > i,
 .toolbar-btn-label {
   color: @button-font;
+}
+
+div.input_prompt {
+  color: @line-number-color;
+}
+
+.edit_mode div.cell.selected:before {
+  background: @test-scope-color;
+}
+
+div.output_scroll {
+  -webkit-box-shadow: inset 0 2px 8px rgb(0 0 0 / 20%);
+  box-shadow: inset 0 2px 8px rgb(0 0 0 / 20%);
+}
+
+/***
+syntax
+ */
+
+.cm-s-ipython span.cm-keyword,
+.cm-keyword,
+.cm-s-ipython span.cm-builtin,
+.cm-builtin
+{
+  color: @keyword-color;
+  font-weight: normal;
+}
+
+.cm-operator,
+.cm-s-ipython span.cm-operator {
+  color: @html-tag-color;
+}
+
+.cm-s-ipython span.cm-string,
+.cm-string {
+  color: @string-color;
+}
+
+.cm-s-ipython span.cm-variable,
+.cm-variable,
+div.output_area pre {
+  color: @foreground-color;
 }
