@@ -275,9 +275,9 @@ type DokiThemeJupyter = {
 function hexToRGBA(hex) {
   const hexValue = parseInt(hex.substring(1), 16);
   return 'rgba(' + [
+    (hexValue >> 24) & 255,
+    (hexValue >> 16) & 255,
     (hexValue >> 8) & 255,
-    (hexValue >> 4) & 255,
-    (hexValue >> 2) & 255,
     hexValue & 255
   ].join(',') + ')';
 }

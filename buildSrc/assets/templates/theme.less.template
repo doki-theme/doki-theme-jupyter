@@ -5,6 +5,7 @@
 @text-editor-background: {{textEditorBackground}};
 @border-color: {{borderColor}};
 @accent-color: {{accentColor}};
+@more-transparent-accent-color: {{accentColorMoreTransparent}};
 @caret-row: {{caretRow}};
 @code-block: {{codeBlock}};
 @highlight-color: {{highlightColor}};
@@ -19,3 +20,6 @@
 @keyword-color: {{keywordColor}};
 @html-tag-color: {{htmlTagColor}};
 @string-color: {{stringColor}};
+@secondary-background: {{secondaryBackground}};
+@selection-background: {{selectionBackground}};
+@base-icon-color: {{baseIconColor}};
