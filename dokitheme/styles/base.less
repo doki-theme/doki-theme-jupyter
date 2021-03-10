@@ -32,7 +32,9 @@ div, p, body, div, span,
 #header,
 .navbar-collapse,
 div.cell.selected,
-div.cell.selected.jupyter-soft-selected
+div.cell.selected.jupyter-soft-selected,
+#site,
+.list_container > div
 {
   background-image: url(@wallpaper) !important;
   background-repeat: no-repeat !important;
@@ -41,18 +43,23 @@ div.cell.selected.jupyter-soft-selected
   background-size: cover !important;
 }
 
+#site,
 .typeahead-container.result .typeahead-list,
 #ipython-main-app, #notebook {
   background-color: @base-background;
 }
 
 .notebook_app > #header,
- #notebook > .container
+ #notebook > .container,
+body > #header,
+#notebook_list_header.list_header
 {
   background-color: @header-color;
   box-shadow: none;
 }
 
+.list_header > div input,
+.list_item > div input,
 .typeahead-field input:last-child,
 .typeahead-hint,
 input,
@@ -67,11 +74,32 @@ div.input_area {
   border: none;
 }
 
+.list_container > div:nth-child(even) {
+  background-color: @highlight-color;
+}
+
+.nav-tabs > li > a:hover,
+.list_container,
+.list_container > div,
+#tabs.nav-tabs {
+  border: none;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  border: none;
+  border-bottom: 2px solid @accent-color;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus,
 .navbar-default .navbar-nav > li > a:hover {
   color: @info-foreground;
   background-color: @highlight-color;
 }
 
+.item_icon,
+.fa,
 .dropdown-submenu > a:after {
   color: @base-icon-color !important;
 }
@@ -84,7 +112,9 @@ div.input_area {
 .filename,
 .checkpoint_status,
 .autosave_status,
-.command-shortcut:before
+.command-shortcut:before,
+.nav > li > a,
+.breadcrumb > li > a
 {
   color: @info-foreground;
 }
@@ -160,6 +190,9 @@ div.out_prompt_overlay:hover {
   background-color: @caret-row;
 }
 
+.list_container > div:hover,
+.list_container > div:active,
+.list_container > div:focus,
 .typeahead-dropdown>li.active>a,
 .typeahead-dropdown>li>a:focus,
 .typeahead-dropdown>li>a:hover,
@@ -184,6 +217,7 @@ div.out_prompt_overlay:hover {
   color: @button-font
 }
 
+span#login_widget > .button, #logout, #shutdown,
 .typeahead-container button,
 .typeahead-button,
 .btn-default, .toolbar select, button {
@@ -206,7 +240,10 @@ button:active,
 button:focus,
 .typeahead-container button:hover,
 .typeahead-container button:active,
-.typeahead-container button:focus
+.typeahead-container button:focus,
+span#login_widget > .button:hover,
+#logout:hover,
+#shutdown:hover
 {
   color: @button-font;
   background: @highlight-color;
@@ -214,6 +251,7 @@ button:focus,
   outline: none;
 }
 
+span#login_widget > .button, #logout, #shutdown,
 button > i,
 .toolbar-btn-label {
   color: @button-font;
