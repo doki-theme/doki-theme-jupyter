@@ -23,3 +23,4 @@
 @secondary-background: {{secondaryBackground}};
 @selection-background: {{selectionBackground}};
 @base-icon-color: {{baseIconColor}};
+@accent-color-less-transparent: {{accentColorLessTransparent}};

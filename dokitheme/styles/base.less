@@ -69,6 +69,7 @@ input,
 
 .modal.fade .modal-dialog,
 .modal-content,
+.panel-group .panel,
 div.input_area {
   background-color: @text-editor-background;
   border: none;
@@ -141,9 +142,20 @@ input,
   border-left-width: 2px;
 }
 
+#running .panel-group .panel .panel-heading a:focus,
+#running .panel-group .panel .panel-heading a:hover
+{
+  color: @accent-color-less-transparent;
+}
+
+#running .panel-group .panel .panel-heading,
 #menubar .navbar {
   background-color: @header-color;
   border: none;
+}
+
+a {
+  color: @accent-color;
 }
 
 div.cell.selected:before,
