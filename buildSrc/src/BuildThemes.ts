@@ -306,11 +306,15 @@ function buildTemplateVariables(
       ...accum,
       [colorName]: sanitizeColor(colorValue),
     }), {});
-  return {
+  const evaluatedColors: StringDictionary<string> = {
     ...cleanedColors,
     ...colorsOverride,
+  };
+  return {
+    ...evaluatedColors,
     stickerName: dokiThemeDefinition.stickers.default,
     anchor: dokiThemeJupyterDefinition.backgrounds?.default?.anchor || 'center',
+    editorAccentColor: dokiThemeDefinition.overrides?.editorScheme?.colors?.accentColor || evaluatedColors.accentColor,
   };
 }
 

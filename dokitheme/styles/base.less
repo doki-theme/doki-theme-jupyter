@@ -1,8 +1,11 @@
 div, p, body, div, span,
 .form-control,
 .dropdown-menu > li > a,
-.typeahead-dropdown>li>a,
-.typeahead-list>li>a
+.typeahead-dropdown > li > a,
+.typeahead-list > li > a ,
+.rendered_html,
+.rendered_html ul
+
 {
   color: @foreground-color;
 }
@@ -34,8 +37,7 @@ div, p, body, div, span,
 div.cell.selected,
 div.cell.selected.jupyter-soft-selected,
 #site,
-.list_container > div
-{
+.list_container > div {
   background-image: url(@wallpaper) !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
@@ -50,10 +52,9 @@ div.cell.selected.jupyter-soft-selected,
 }
 
 .notebook_app > #header,
- #notebook > .container,
+#notebook > .container,
 body > #header,
-#notebook_list_header.list_header
-{
+#notebook_list_header.list_header {
   background-color: @header-color;
   box-shadow: none;
 }
@@ -115,14 +116,19 @@ div.input_area {
 .autosave_status,
 .command-shortcut:before,
 .nav > li > a,
-.breadcrumb > li > a
+a.anchor-link:link,
+.breadcrumb > li > a,
+.collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h1:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h2:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h3:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h4:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h5:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h6:after
 {
-  color: @info-foreground;
+  color: @info-foreground !important;
+}
+
+.collapsible_headings_ellipsis .rendered_html h1, .collapsible_headings_ellipsis .rendered_html h2, .collapsible_headings_ellipsis .rendered_html h3, .collapsible_headings_ellipsis .rendered_html h4, .collapsible_headings_ellipsis .rendered_html h5, .collapsible_headings_ellipsis .rendered_html h6 {
+  color: @line-number-color;
 }
 
 .dropdown-menu .divider,
-body > #header .header-bar
-{
+body > #header .header-bar {
   background: @border-color;
 }
 
@@ -133,8 +139,9 @@ body > #header .header-bar
 .modal-header,
 .modal-footer,
 input,
-.form-control
-{
+.rendered_html hr,
+hr,
+.form-control {
   border-color: @border-color;
 }
 
@@ -143,8 +150,7 @@ input,
 }
 
 #running .panel-group .panel .panel-heading a:focus,
-#running .panel-group .panel .panel-heading a:hover
-{
+#running .panel-group .panel .panel-heading a:hover {
   color: @accent-color-less-transparent;
 }
 
@@ -193,11 +199,10 @@ div.out_prompt_overlay:hover {
   color: @button-font;
 }
 
-.typeahead-list>li.typeahead-group.active>a,
-.typeahead-list>li.typeahead-group>a,
-.typeahead-list>li.typeahead-group>a:focus,
-.typeahead-list>li.typeahead-group>a:hover
-{
+.typeahead-list > li.typeahead-group.active > a,
+.typeahead-list > li.typeahead-group > a,
+.typeahead-list > li.typeahead-group > a:focus,
+.typeahead-list > li.typeahead-group > a:hover {
   color: @info-foreground;
   background-color: @caret-row;
 }
@@ -205,12 +210,12 @@ div.out_prompt_overlay:hover {
 .list_container > div:hover,
 .list_container > div:active,
 .list_container > div:focus,
-.typeahead-dropdown>li.active>a,
-.typeahead-dropdown>li>a:focus,
-.typeahead-dropdown>li>a:hover,
-.typeahead-list>li.active>a,
-.typeahead-list>li>a:focus,
-.typeahead-list>li>a:hover,
+.typeahead-dropdown > li.active > a,
+.typeahead-dropdown > li > a:focus,
+.typeahead-dropdown > li > a:hover,
+.typeahead-list > li.active > a,
+.typeahead-list > li > a:focus,
+.typeahead-list > li > a:hover,
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .cm-s-ipython div.CodeMirror-selected, // code selection background
@@ -255,8 +260,7 @@ button:focus,
 .typeahead-container button:focus,
 span#login_widget > .button:hover,
 #logout:hover,
-#shutdown:hover
-{
+#shutdown:hover {
   color: @button-font;
   background: @highlight-color;
   border: none;
@@ -304,6 +308,7 @@ Scroll bars n stuff
   background: @selection-background;
   color: @selection-foreground;
 }
+
 ::selection {
   background: @selection-background;
   color: @selection-foreground;
@@ -322,6 +327,8 @@ Scroll bars n stuff
 }
 
 
+
+
 /***
 syntax
  */
@@ -329,8 +336,7 @@ syntax
 .cm-s-ipython span.cm-keyword,
 .cm-keyword,
 .cm-s-ipython span.cm-builtin,
-.cm-builtin
-{
+.cm-builtin {
   color: @keyword-color;
   font-weight: normal;
 }
@@ -349,4 +355,20 @@ syntax
 .cm-variable,
 div.output_area pre {
   color: @foreground-color;
+}
+
+.cm-s-ipython span.cm-comment,
+.cm-comment {
+  color: @comments;
+  font-style: italic;
+}
+
+.cm-s-ipython span.cm-def,
+.cm-def {
+  color: @class-name-color;
+  font-style: italic;
+}
+
+.cm-s-ipython span.cm-attribute {
+  color: @editor-accent-color;
 }

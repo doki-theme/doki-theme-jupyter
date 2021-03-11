@@ -24,3 +24,7 @@
 @selection-background: {{selectionBackground}};
 @base-icon-color: {{baseIconColor}};
 @accent-color-less-transparent: {{accentColorLessTransparent}};
+@comments: {{comments}};
+@editor-accent-color: {{editorAccentColor}};
+@class-name-color: {{classNameColor}};
+@key-color: {{keyColor}};
