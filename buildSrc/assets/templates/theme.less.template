@@ -28,3 +28,4 @@
 @editor-accent-color: {{editorAccentColor}};
 @class-name-color: {{classNameColor}};
 @key-color: {{keyColor}};
+@constant-color: {{constantColor}};

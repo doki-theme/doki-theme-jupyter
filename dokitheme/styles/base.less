@@ -5,7 +5,6 @@ div, p, body, div, span,
 .typeahead-list > li > a ,
 .rendered_html,
 .rendered_html ul
-
 {
   color: @foreground-color;
 }
@@ -37,6 +36,8 @@ div, p, body, div, span,
 div.cell.selected,
 div.cell.selected.jupyter-soft-selected,
 #site,
+.notification_widget,
+div.out_prompt_overlay:hover,
 .list_container > div {
   background-image: url(@wallpaper) !important;
   background-repeat: no-repeat !important;
@@ -118,7 +119,8 @@ div.input_area {
 .nav > li > a,
 a.anchor-link:link,
 .breadcrumb > li > a,
-.collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h1:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h2:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h3:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h4:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h5:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h6:after
+.collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h1:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h2:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h3:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h4:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h5:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h6:after,
+h1, h2, h3, h4, h5, h6
 {
   color: @info-foreground !important;
 }
@@ -293,6 +295,8 @@ div.output_scroll {
   box-shadow: inset 0 2px 8px rgb(0 0 0 / 20%);
 }
 
+.notification_widget:focus, .notification_widget.focus,
+.notification_widget:active, .notification_widget.active, .open > .dropdown-toggle.notification_widget,
 span.save_widget span.filename:hover,
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
@@ -371,4 +375,17 @@ div.output_area pre {
 
 .cm-s-ipython span.cm-attribute {
   color: @editor-accent-color;
+}
+
+.cm-s-ipython span.cm-variable-2,
+.cm-variable-2 {
+  color: @key-color;
+}
+
+.cm-s-ipython span.cm-number,
+.cm-number,
+.cm-s-ipython span.cm-atom,
+.cm-atom
+{
+color: @constant-color;
 }
