@@ -4,7 +4,8 @@ div, p, body, div, span,
 .typeahead-dropdown > li > a,
 .typeahead-list > li > a ,
 .rendered_html,
-.rendered_html ul
+.rendered_html ul,
+.rendered_html table
 {
   color: @foreground-color;
 }
@@ -38,7 +39,15 @@ div.cell.selected.jupyter-soft-selected,
 #site,
 .notification_widget,
 div.out_prompt_overlay:hover,
-.list_container > div {
+.rendered_html tbody tr:nth-child(odd),
+#texteditor-backdrop,
+.output_result > pre,
+.output_stdout > pre,
+.output_stderr > pre,
+.rendered_html tbody tr:hover,
+.list_container > div,
+div.output_stderr
+{
   background-image: url(@wallpaper) !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
@@ -46,7 +55,12 @@ div.out_prompt_overlay:hover,
   background-size: cover !important;
 }
 
+body > #header #header-container {
+  background-image: none;
+}
+
 #site,
+#texteditor-backdrop,
 .typeahead-container.result .typeahead-list,
 #ipython-main-app, #notebook {
   background-color: @base-background;
@@ -69,6 +83,8 @@ input,
   background-color: @secondary-background;
 }
 
+.cm-s-ipython span.cm-variable, .cm-variable, div.output_area pre,
+.CodeMirror-scroll,
 .modal.fade .modal-dialog,
 .modal-content,
 .panel-group .panel,
@@ -77,6 +93,13 @@ div.input_area {
   border: none;
 }
 
+#texteditor-backdrop #texteditor-container .CodeMirror-gutter,
+#texteditor-backdrop #texteditor-container .CodeMirror-gutters
+{
+background-color: @text-editor-background;
+}
+
+.rendered_html tbody tr:nth-child(odd),
 .list_container > div:nth-child(even) {
   background-color: @highlight-color;
 }
@@ -120,13 +143,31 @@ div.input_area {
 a.anchor-link:link,
 .breadcrumb > li > a,
 .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h1:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h2:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h3:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h4:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h5:after, .collapsible_headings_collapsed.collapsible_headings_ellipsis .rendered_html h6:after,
-h1, h2, h3, h4, h5, h6
+h1, h2, h3, h4, h5, h6,
+.item_modified,
+.last_modified
 {
   color: @info-foreground !important;
 }
 
+.rendered_html th,
+.CodeMirror-linenumber,
 .collapsible_headings_ellipsis .rendered_html h1, .collapsible_headings_ellipsis .rendered_html h2, .collapsible_headings_ellipsis .rendered_html h3, .collapsible_headings_ellipsis .rendered_html h4, .collapsible_headings_ellipsis .rendered_html h5, .collapsible_headings_ellipsis .rendered_html h6 {
   color: @line-number-color;
+}
+
+.dirty-indicator-clean {
+  margin-left: 1rem;
+}
+
+.dirty-indicator-clean,
+.running_notebook_icon:before,
+div.output_prompt {
+  color: @terminal-ansi-green;
+}
+
+.item_buttons .kernel-name {
+  color: @terminal-ansi-red
 }
 
 .dropdown-menu .divider,
@@ -143,6 +184,7 @@ body > #header .header-bar {
 input,
 .rendered_html hr,
 hr,
+.CodeMirror-gutters,
 .form-control {
   border-color: @border-color;
 }
@@ -156,6 +198,7 @@ hr,
   color: @accent-color-less-transparent;
 }
 
+.terminal-app #header,
 #running .panel-group .panel .panel-heading,
 #menubar .navbar {
   background-color: @header-color;
@@ -176,6 +219,13 @@ div.cell.selected.jupyter-soft-selected:before {
   border-left: 2px solid @accent-color !important;
 }
 
+#texteditor-container > div.CodeMirror {
+  border: 1px solid @border-color;
+}
+
+div.output_stderr {
+  background-color: @diff-conflict;
+}
 
 div.cell.selected, div.cell.selected.jupyter-soft-selected {
   border: none;
@@ -209,6 +259,7 @@ div.out_prompt_overlay:hover {
   background-color: @caret-row;
 }
 
+
 .list_container > div:hover,
 .list_container > div:active,
 .list_container > div:focus,
@@ -222,6 +273,7 @@ div.out_prompt_overlay:hover {
 .dropdown-menu > li > a:focus,
 .cm-s-ipython div.CodeMirror-selected, // code selection background
 .btn-primary,
+.rendered_html tbody tr:hover,
 .btn-primary .btn-default {
   color: @selection-foreground !important;
   background-color: @selection-background !important;
@@ -234,6 +286,13 @@ div.out_prompt_overlay:hover {
 .typeahead-search-icon:after {
   content: 'search';
   color: @button-font
+}
+
+
+.btn-warning {
+  background: @button-color;
+  color: @button-font;
+  border: none;
 }
 
 span#login_widget > .button, #logout, #shutdown,
@@ -262,7 +321,10 @@ button:focus,
 .typeahead-container button:focus,
 span#login_widget > .button:hover,
 #logout:hover,
-#shutdown:hover {
+#shutdown:hover,
+.btn-warning:active, .btn-warning.active, .open > .dropdown-toggle.btn-warning,
+.btn-warning:focus, .btn-warning.focus
+{
   color: @button-font;
   background: @highlight-color;
   border: none;
@@ -284,6 +346,9 @@ div.input_prompt {
   background: @test-scope-color;
 }
 
+.edit_app #header,
+#texteditor-backdrop #texteditor-container,
+.terminal-app .terminal,
 .form-control:focus {
   border: none;
   outline: 0;
@@ -300,7 +365,9 @@ div.output_scroll {
 span.save_widget span.filename:hover,
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
+.navbar-default .navbar-nav > .open > a:focus,
+.btn-warning:hover
+{
   background: @highlight-color;
   color: @info-foreground;
 }
@@ -373,6 +440,7 @@ div.output_area pre {
   font-style: italic;
 }
 
+a:hover, a:focus,
 .cm-s-ipython span.cm-attribute {
   color: @editor-accent-color;
 }

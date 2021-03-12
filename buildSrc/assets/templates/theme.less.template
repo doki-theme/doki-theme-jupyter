@@ -29,3 +29,6 @@
 @class-name-color: {{classNameColor}};
 @key-color: {{keyColor}};
 @constant-color: {{constantColor}};
+@terminal-ansi-green: {{terminal.ansiGreen}};
+@terminal-ansi-red: {{terminal.ansiRed}};
+@diff-conflict: {{diff.conflict}};
