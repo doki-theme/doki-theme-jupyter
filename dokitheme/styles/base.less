@@ -5,7 +5,8 @@ div, p, body, div, span,
 .typeahead-list > li > a ,
 .rendered_html,
 .rendered_html ul,
-.rendered_html table
+.rendered_html table,
+.text_cell.rendered .rendered_html
 {
   color: @foreground-color;
 }
@@ -46,7 +47,9 @@ div.out_prompt_overlay:hover,
 .output_stderr > pre,
 .rendered_html tbody tr:hover,
 .list_container > div,
-div.output_stderr
+div.output_stderr,
+.rendered_html code,
+body
 {
   background-image: url(@wallpaper) !important;
   background-repeat: no-repeat !important;
@@ -59,6 +62,7 @@ body > #header #header-container {
   background-image: none;
 }
 
+body,
 #site,
 #texteditor-backdrop,
 .typeahead-container.result .typeahead-list,
@@ -109,6 +113,10 @@ background-color: @text-editor-background;
 .list_container > div,
 #tabs.nav-tabs {
   border: none;
+}
+
+blockquote {
+  border-color: @accent-color;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
@@ -215,7 +223,8 @@ div.cell.selected.jupyter-soft-selected:before {
 }
 
 //Caret Color
-.cm-s-ipython .CodeMirror-cursor {
+.cm-s-ipython .CodeMirror-cursor,
+.CodeMirror-cursor {
   border-left: 2px solid @accent-color !important;
 }
 
@@ -227,6 +236,7 @@ div.output_stderr {
   background-color: @diff-conflict;
 }
 
+.rendered_html code,
 div.cell.selected, div.cell.selected.jupyter-soft-selected {
   border: none;
   background: @code-block;
@@ -413,11 +423,18 @@ syntax
 }
 
 .cm-operator,
+.cm-s-default .cm-tag,
+.cm-tag,
 .cm-s-ipython span.cm-operator {
   color: @html-tag-color;
 }
 
+.rendered_html pre, .rendered_html code {
+  color: @selection-foreground;
+}
+
 .cm-s-ipython span.cm-string,
+.cm-s-default .cm-string,
 .cm-string {
   color: @string-color;
 }
@@ -434,17 +451,22 @@ div.output_area pre {
   font-style: italic;
 }
 
+.cm-s-default .cm-variable-2,
 .cm-s-ipython span.cm-def,
 .cm-def {
   color: @class-name-color;
   font-style: italic;
 }
 
+.cm-s-ipython span.cm-link,
 a:hover, a:focus,
 .cm-s-ipython span.cm-attribute {
   color: @editor-accent-color;
 }
-
+.cm-s-ipython span.cm-header,
+.cm-s-default .cm-header,
+.cm-header,
+.cm-s-default .cm-link,
 .cm-s-ipython span.cm-variable-2,
 .cm-variable-2 {
   color: @key-color;
