@@ -36,3 +36,5 @@
 @terminal-ansi-yellow: {{terminal.ansiYellow}};
 @terminal-ansi-blue: {{terminal.ansiBlue}};
 @diff-conflict: {{diff.conflict}};
+@error-color: {{errorColor}};
+@non-project-file-scope-color: {{nonProjectFileScopeColor}};

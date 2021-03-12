@@ -62,7 +62,7 @@ body
 }
 
 body > #header #header-container {
-  background-image: none;
+  background-image: none !important;
 }
 
 body,
@@ -90,7 +90,15 @@ input,
   background-color: @secondary-background;
 }
 
-.cm-s-ipython span.cm-variable, .cm-variable, div.output_area pre,
+div.output_area pre {
+  padding: 2rem;
+}
+
+div.output_subarea {
+  padding: 0;
+}
+
+div.output_area pre,
 .CodeMirror-scroll,
 .modal.fade .modal-dialog,
 .modal-content,
@@ -108,9 +116,12 @@ div.input_area {
 background-color: @text-editor-background;
 }
 
-.rendered_html tbody tr:nth-child(odd),
-.list_container > div:nth-child(even) {
+.rendered_html tbody tr:nth-child(odd){
   background-color: @highlight-color;
+}
+
+.list_container > div:nth-child(even) {
+ background-color: @caret-row;
 }
 
 .nav-tabs > li > a:hover,
@@ -177,22 +188,26 @@ h1, h2, h3, h4, h5, h6,
 .running_notebook_icon:before,
 .ansi-green-intense-fg,
 .ansi-green,
+.ansi-green-fg,
 div.output_prompt {
   color: @terminal-ansi-green;
 }
 
-.ansi-cyan-fg {
+.ansi-cyan-fg
+{
   color: @terminal-ansi-cyan;
 }
 
 .ansi-blue-intense-fg,
-.ansi-blue
+.ansi-blue,
+.ansi-blue-fg
 {
   color: @terminal-ansi-blue;
 }
 
 .ansi-yellow-intense-fg,
-.ansi-yellow
+.ansi-yellow,
+.ansi-yellow-fg
 {
   color: @terminal-ansi-yellow;
 }
@@ -200,6 +215,7 @@ div.output_prompt {
 
 .ansi-red-intense-fg,
 .ansi-red,
+.ansi-red-fg,
 .item_buttons .kernel-name {
   color: @terminal-ansi-red
 }
@@ -308,6 +324,7 @@ div.out_prompt_overlay:hover {
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .cm-s-ipython div.CodeMirror-selected, // code selection background
+.cm-s-default div.CodeMirror-selected, // code selection background
 .btn-primary,
 .rendered_html tbody tr:hover,
 .btn-primary .btn-default {
@@ -325,8 +342,13 @@ div.out_prompt_overlay:hover {
 }
 
 
+.notification_widget.warning {
+  background-color: @non-project-file-scope-color;
+}
+
+
 .btn-warning {
-  background: @button-color;
+  background: @non-project-file-scope-color;
   color: @button-font;
   border: none;
 }
@@ -441,8 +463,10 @@ syntax
  */
 
 .cm-s-ipython span.cm-keyword,
+.cm-s-default span.cm-keyword,
 .cm-keyword,
 .cm-s-ipython span.cm-builtin,
+.cm-s-default span.cm-builtin,
 .cm-builtin {
   color: @keyword-color;
   font-weight: normal;
@@ -451,7 +475,9 @@ syntax
 .cm-operator,
 .cm-s-default .cm-tag,
 .cm-tag,
-.cm-s-ipython span.cm-operator {
+.cm-s-ipython span.cm-operator,
+.cm-s-default span.cm-operator
+{
   color: @html-tag-color;
 }
 
@@ -466,12 +492,14 @@ syntax
 }
 
 .cm-s-ipython span.cm-variable,
+.cm-s-default span.cm-variable,
 .cm-variable,
 div.output_area pre {
   color: @foreground-color;
 }
 
 .cm-s-ipython span.cm-comment,
+.cm-s-default .cm-comment,
 .cm-comment {
   color: @comments;
   font-style: italic;
@@ -479,11 +507,16 @@ div.output_area pre {
 
 .cm-s-default .cm-variable-2,
 .cm-s-ipython span.cm-def,
+.cm-s-default span.cm-def,
 .cm-def {
   color: @class-name-color;
   font-style: italic;
 }
 
+.cm-s-default .cm-meta,
+.cm-s-ipython span.cm-meta,
+.cm-meta,
+div.CodeMirror span.CodeMirror-matchingbracket,
 .cm-s-ipython span.cm-link,
 a:hover, a:focus,
 .cm-s-ipython span.cm-attribute {
@@ -504,4 +537,11 @@ a:hover, a:focus,
 .cm-atom
 {
 color: @constant-color;
+}
+
+.cm-s-ipython span.cm-error,
+.cm-s-default span.cm-error
+{
+  color: @error-color;
+
 }
