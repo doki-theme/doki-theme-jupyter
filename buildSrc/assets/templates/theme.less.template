@@ -31,4 +31,8 @@
 @constant-color: {{constantColor}};
 @terminal-ansi-green: {{terminal.ansiGreen}};
 @terminal-ansi-red: {{terminal.ansiRed}};
+@terminal-ansi-green: {{terminal.ansiGreen}};
+@terminal-ansi-cyan: {{terminal.ansiCyan}};
+@terminal-ansi-yellow: {{terminal.ansiYellow}};
+@terminal-ansi-blue: {{terminal.ansiBlue}};
 @diff-conflict: {{diff.conflict}};

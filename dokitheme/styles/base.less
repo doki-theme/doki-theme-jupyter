@@ -49,6 +49,9 @@ div.out_prompt_overlay:hover,
 .list_container > div,
 div.output_stderr,
 .rendered_html code,
+.rendered_html pre code,
+div.output_area pre,
+.rendered_html pre,
 body
 {
   background-image: url(@wallpaper) !important;
@@ -92,6 +95,8 @@ input,
 .modal.fade .modal-dialog,
 .modal-content,
 .panel-group .panel,
+.rendered_html pre code,
+.rendered_html pre,
 div.input_area {
   background-color: @text-editor-background;
   border: none;
@@ -170,10 +175,31 @@ h1, h2, h3, h4, h5, h6,
 
 .dirty-indicator-clean,
 .running_notebook_icon:before,
+.ansi-green-intense-fg,
+.ansi-green,
 div.output_prompt {
   color: @terminal-ansi-green;
 }
 
+.ansi-cyan-fg {
+  color: @terminal-ansi-cyan;
+}
+
+.ansi-blue-intense-fg,
+.ansi-blue
+{
+  color: @terminal-ansi-blue;
+}
+
+.ansi-yellow-intense-fg,
+.ansi-yellow
+{
+  color: @terminal-ansi-yellow;
+}
+
+
+.ansi-red-intense-fg,
+.ansi-red,
 .item_buttons .kernel-name {
   color: @terminal-ansi-red
 }
