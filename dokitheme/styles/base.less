@@ -2,7 +2,10 @@ div, p, body, div, span,
 .form-control,
 .dropdown-menu > li > a,
 .typeahead-dropdown > li > a,
+.typeahead__dropdown > li > a,
 .typeahead-list > li > a ,
+.typeahead__list > li > a ,
+.typeahead__dropdown .typeahead__dropdown-item>a, .typeahead__list .typeahead__item>a,
 .rendered_html,
 .rendered_html ul,
 .rendered_html table,
@@ -70,8 +73,15 @@ body,
 #site,
 #texteditor-backdrop,
 .typeahead-container.result .typeahead-list,
+.typeahead__container.result .typeahead__list,
+.typeahead-container.result .typeahead-list,
 #ipython-main-app, #notebook {
   background-color: @base-background;
+}
+
+.typeahead__list>.typeahead__group.active>a, .typeahead__list>.typeahead__group>a, .typeahead__list>.typeahead__group>a:focus, .typeahead__list>.typeahead__group>a:hover {
+  background-color: @header-color;
+  color: @editor-accent-color;
 }
 
 .notebook_app > #header,
@@ -85,8 +95,12 @@ body > #header,
 .list_header > div input,
 .list_item > div input,
 .typeahead-field input:last-child,
+.typeahead__field input:last-child,
+.typeahead__field input:last-child,
 .typeahead-hint,
 input,
+.typeahead__query,
+.typeahead__container.hint .typeahead__field [contenteditable], .typeahead__container.hint .typeahead__field input, .typeahead__container.hint .typeahead__field textarea,
 .form-control {
   background-color: @secondary-background;
 }
@@ -122,6 +136,7 @@ background-color: @text-editor-background;
 }
 
 select option:checked,
+.typeahead__list>li:nth-child(even),
 .list_container > div:nth-child(even) {
  background-color: @caret-row;
 }
@@ -129,7 +144,12 @@ select option:checked,
 
 .nav-tabs > li > a:hover,
 .list_container,
+.typeahead__dropdown, .typeahead__list,
+.typeahead__list>li,
+.typeahead__list>li.typeahead__group+li.typeahead__item,
 .list_container > div,
+.typeahead__list>.typeahead__group,
+.typeahead__list>.typeahead__group:first-child,
 #tabs.nav-tabs {
   border: none;
 }
@@ -166,6 +186,7 @@ blockquote {
 .checkpoint_status,
 .autosave_status,
 .command-shortcut:before,
+.edit-shortcut:before,
 .nav > li > a,
 a.anchor-link:link,
 .breadcrumb > li > a,
@@ -231,6 +252,8 @@ body > #header .header-bar {
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form,
 .typeahead-field input:last-child, .typeahead-hint,
+.typeahead__field input:last-child, .typeahead__hint,
+.typeahead-field input:last-child, .typeahead-hint,
 #kernel_indicator,
 .modal-header,
 .modal-footer,
@@ -238,6 +261,8 @@ input,
 .rendered_html hr,
 hr,
 .CodeMirror-gutters,
+.typeahead__field .typeahead__hint, .typeahead__field [contenteditable], .typeahead__field input, .typeahead__field textarea,
+.typeahead__field .typeahead__hint:active, .typeahead__field .typeahead__hint:focus, .typeahead__field [contenteditable]:active, .typeahead__field [contenteditable]:focus, .typeahead__field input:active, .typeahead__field input:focus, .typeahead__field textarea:active, .typeahead__field textarea:focus,
 .form-control {
   border-color: @border-color;
 }
@@ -250,6 +275,7 @@ hr,
 #running .panel-group .panel .panel-heading a:hover {
   color: @accent-color-less-transparent;
 }
+
 
 .terminal-app #header,
 #running .panel-group .panel .panel-heading,
@@ -312,9 +338,17 @@ div.out_prompt_overlay:hover {
 }
 
 .typeahead-list > li.typeahead-group.active > a,
+.typeahead__list > li.typeahead__group.active > a,
+.typeahead__list > li.typeahead-group.active > a,
+.typeahead-list > li.typeahead-group.active > a,
 .typeahead-list > li.typeahead-group > a,
+.typeahead-list > li.typeahead__group > a,
+.typeahead__list > li.typeahead-group > a,
 .typeahead-list > li.typeahead-group > a:focus,
-.typeahead-list > li.typeahead-group > a:hover {
+.typeahead-list > li.typeahead__group > a:focus,
+.typeahead__list > li.typeahead-group > a:focus,
+.typeahead-list > li.typeahead-group > a:hover,
+.typeahead-list > li.typeahead__group > a:hover {
   color: @info-foreground;
   background-color: @caret-row;
 }
@@ -324,10 +358,17 @@ div.out_prompt_overlay:hover {
 .list_container > div:active,
 .list_container > div:focus,
 .typeahead-dropdown > li.active > a,
+.typeahead__dropdown > li.active > a,
+.typeahead__dropdown > li.active > a,
 .typeahead-dropdown > li > a:focus,
 .typeahead-dropdown > li > a:hover,
+.typeahead__dropdown > li > a:hover,
+.typeahead__dropdown > li > a:hover,
 .typeahead-list > li.active > a,
+.typeahead__list > li.active > a,
 .typeahead-list > li > a:focus,
+.typeahead__list > li > a:focus,
+.typeahead__list > li > a:focus,
 .typeahead-list > li > a:hover,
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
@@ -340,11 +381,14 @@ div.out_prompt_overlay:hover {
   background-color: @selection-background !important;
 }
 
-.typeahead-search-icon {
+.typeahead-search-icon,
+.typeahead__search-icon {
   background: none;
 }
 
-.typeahead-search-icon:after {
+.typeahead-search-icon:after,
+.typeahead__search-icon:after
+{
   content: 'search';
   color: @button-font
 }
@@ -364,6 +408,8 @@ div.out_prompt_overlay:hover {
 span#login_widget > .button, #logout, #shutdown,
 .typeahead-container button,
 .typeahead-button,
+.typeahead__button,
+.typeahead__container button,
 .btn-default, .toolbar select, button {
   background: @button-color;
   border: none;
@@ -383,8 +429,11 @@ button:hover,
 button:active,
 button:focus,
 .typeahead-container button:hover,
+.typeahead__container button:hover,
 .typeahead-container button:active,
+.typeahead__container button:active,
 .typeahead-container button:focus,
+.typeahead__container button:focus,
 span#login_widget > .button:hover,
 #logout:hover,
 #shutdown:hover,
