@@ -1,10 +1,11 @@
 import os
 import sys
+from shutil import copyfile
 from tempfile import mkstemp
 
 import lesscpy
 
-from constants import jupyter_customcss_path, styles_dir
+from constants import jupyter_customcss_path, styles_dir, fonts_path, jupyter_custom_fonts_path
 from file_system_tools import ensure_directories_exist
 from theme_janitor import remove_theme_artifacts
 
@@ -29,10 +30,17 @@ def install_theme(theme_definition):
     write_final_css(css_string)
 
 
+def copy_fonts():
+    for fontfile in os.listdir(fonts_path):
+        copyfile(os.path.join(fonts_path, fontfile),
+                 os.path.join(jupyter_custom_fonts_path, fontfile))
+
+
 def install_theme_styles(theme_definition):
     remove_theme_artifacts()
     ensure_directories_exist()
     install_theme(theme_definition)
+    copy_fonts()
 
 
 def write_final_css(css_as_string):

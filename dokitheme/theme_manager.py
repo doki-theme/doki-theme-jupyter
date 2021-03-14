@@ -9,7 +9,7 @@ from argument_suggestion import suggest_theme
 
 def list_themes():
     print("Theme Names (include double quotes): \n   {}".format('\n   '.join(
-        map(lambda tuple: '"{}"'.format(tuple[0]), themes.items()),
+        map(lambda theme_name: '"{}"'.format(theme_name[0]), themes.items()),
     )))
 
 

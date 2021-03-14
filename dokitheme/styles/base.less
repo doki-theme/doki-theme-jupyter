@@ -1,3 +1,42 @@
+@font-face {
+  font-family: "Fira Mono";
+  font-weight: normal;
+  font-style: normal;
+  src: local('"Fira Mono"'), url('fonts/VictorMono-Regular.ttf'),
+  url('fonts/VictorMono-Italic.ttf') format('truetype');
+}
+
+.completions select,
+.CodeMirror,
+.cm-s-ipython.CodeMirror,
+.ipython_tooltip .tooltiptext pre,
+.ipython_tooltip,
+div.CodeMirror,
+div.CodeMirror pre,
+.terminal-app .terminal,
+input.raw_input,
+.kse-input-group-pretty > kbd,
+.kse-input-group-pretty > kbd,
+div.text_cell_render pre,
+div.text_cell_render code,
+div.rendered_html pre,
+.well code,
+code,
+div.rendered_html code,
+div.cell.text_cell.unrendered .prompt,
+div.cell.text_cell.rendered .prompt,
+div.out_prompt_overlay.prompt,
+div.prompt.output_prompt,
+div.output_html,
+div.output_area pre,
+div.output_subarea.output_text.output_stream.output_stdout,
+div.output_subarea.output_text,
+div.prompt,
+.prompt
+{
+  font-family: "Victor Mono", monospace, monospace
+}
+
 div, p, body, div, span,
 .form-control,
 .dropdown-menu > li > a,
@@ -208,6 +247,7 @@ h1, h2, h3, h4, h5, h6,
   margin-left: 1rem;
 }
 
+.item_buttons .running-indicator,
 .dirty-indicator-clean,
 .running_notebook_icon:before,
 .ansi-green-intense-fg,
