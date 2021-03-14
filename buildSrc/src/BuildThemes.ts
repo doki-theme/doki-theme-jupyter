@@ -532,6 +532,7 @@ walkDir(jupyterDefinitionDirectoryPath)
           ...accum,
           [getDisplayName(dokiTheme)]: {
             id: dokiTheme.definition.id,
+            colors: dokiTheme.templateVariables,
           }
         }), {}),
         null,

@@ -66,6 +66,7 @@ body > #header #header-container {
 }
 
 body,
+.completions,
 #site,
 #texteditor-backdrop,
 .typeahead-container.result .typeahead-list,
@@ -120,9 +121,11 @@ background-color: @text-editor-background;
   background-color: @highlight-color;
 }
 
+select option:checked,
 .list_container > div:nth-child(even) {
  background-color: @caret-row;
 }
+
 
 .nav-tabs > li > a:hover,
 .list_container,
@@ -409,6 +412,7 @@ div.input_prompt {
   background: @test-scope-color;
 }
 
+.completions,
 .edit_app #header,
 #texteditor-backdrop #texteditor-container,
 .terminal-app .terminal,
