@@ -29,10 +29,10 @@ def install_theme(theme_definition):
     write_final_css(css_string)
 
 
-def install_theme_styles(theme_id):
+def install_theme_styles(theme_definition):
     remove_theme_artifacts()
     ensure_directories_exist()
-    install_theme(theme_id)
+    install_theme(theme_definition)
 
 
 def write_final_css(css_as_string):
