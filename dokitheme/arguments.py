@@ -1,5 +1,7 @@
 from argparse import ArgumentParser
 
+from constants import default_theme
+
 parser = ArgumentParser()
 parser.add_argument(
     '-l',
@@ -10,7 +12,7 @@ parser.add_argument(
 parser.add_argument(
     '-t',
     '--set-theme',
-    default='Rem',
+    default=default_theme,
     metavar='theme',
     action='store',
     help='name of theme to install'

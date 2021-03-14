@@ -4,7 +4,7 @@ from cycler import cycler
 
 
 def decorate_plotter():
-    doki_theme = themes['OreGairu: Yukinoshita Yukino']
+    doki_theme = get_current_theme()
     colors_ = doki_theme['colors']
     info_foreground_ = colors_['infoForeground']
     header_color_ = colors_['headerColor']

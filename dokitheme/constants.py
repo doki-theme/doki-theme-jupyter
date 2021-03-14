@@ -7,7 +7,6 @@ local_package_path = os.path.dirname(os.path.realpath(__file__))
 
 user_config_path = os.path.join(os.path.expanduser('~'), '.doki-theme-jupyter')
 
-
 # path to install custom.css file (~/.jupyter/custom/)
 jupyter_home_path = jupyter_config_dir()
 jupyter_data_path = jupyter_data_dir()
@@ -31,3 +30,4 @@ current_theme_path = os.path.join(jupyter_custom_config_path, 'current_theme.txt
 default_css_path = os.path.join(default_styles_path, 'custom.css')
 default_js_path = os.path.join(default_styles_path, 'custom.js')
 
+default_theme = 'Re:Zero: Rem'
