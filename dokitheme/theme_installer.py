@@ -5,7 +5,7 @@ from tempfile import mkstemp
 
 import lesscpy
 
-from constants import jupyter_customcss_path, styles_dir, fonts_path, jupyter_custom_fonts_path
+from constants import jupyter_customcss_path, styles_dir, fonts_path, jupyter_custom_fonts_path, jupyter_customjs_path
 from file_system_tools import ensure_directories_exist
 from theme_janitor import remove_theme_artifacts
 
@@ -36,11 +36,61 @@ def copy_fonts():
                  os.path.join(jupyter_custom_fonts_path, fontfile))
 
 
+def install_javascript(theme_definition):
+    colors_ = theme_definition['colors']
+    write_final_javascript("""
+        terminal.term.setOption('theme', {{
+  foreground:    '{}',
+  background:    '{}',
+  black:         '{}',
+  brightBlack:   '{}',
+  red:           '{}',
+  brightRed:     '{}',
+  green:         '{}',
+  brightGreen:   '{}',
+  yellow:        '{}',
+  brightYellow:  '{}',
+  blue:          '{}',
+  brightBlue:    '{}',
+  magenta:       '{}',
+  brightMagenta: '{}',
+  cyan:          '{}',
+  brightCyan:    '{}',
+  white:         '{}',
+  brightWhite:   '{}',
+}});""".format(
+        colors_['foregroundColor'],
+        colors_['textEditorBackground'],
+        "#000000",
+        "#000000",
+        colors_['terminal.ansiRed'],
+        colors_['terminal.ansiRed'],
+        colors_['terminal.ansiGreen'],
+        colors_['terminal.ansiGreen'],
+        colors_['terminal.ansiYellow'],
+        colors_['terminal.ansiYellow'],
+        colors_['terminal.ansiBlue'],
+        colors_['terminal.ansiBlue'],
+        colors_['terminal.ansiMagenta'],
+        colors_['terminal.ansiMagenta'],
+        colors_['terminal.ansiCyan'],
+        colors_['terminal.ansiCyan'],
+        "#ffffff",
+        "#ffffff",
+    ))
+
+
+def write_final_javascript(javascript_as_string):
+    with open_file(jupyter_customjs_path, 'w') as custom_css:
+        custom_css.write(javascript_as_string)
+
+
 def install_theme_styles(theme_definition):
     remove_theme_artifacts()
     ensure_directories_exist()
     install_theme(theme_definition)
     copy_fonts()
+    install_javascript(theme_definition)
 
 
 def write_final_css(css_as_string):
