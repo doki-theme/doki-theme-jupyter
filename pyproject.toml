@@ -1,0 +1,8 @@
+[build-system]
+requires = [
+    "jupyter_core",
+    "notebook>=5.6.0",
+    "python-Levenshtein>=0.12.2",
+    "lesscpy~=0.14.0",
+    "matplotlib~=3.3.4",
+]
