@@ -81,20 +81,13 @@ setup(
         'matplotlib~=3.3.4',
     ],
 
-    # List additional groups of dependencies here (e.g. development
-    # dependencies). Users will be able to install these using the "extras"
-    # syntax, for example:
-    #
-    #   $ pip install sampleproject[dev]
-    #
-    # Similar to `install_requires` above, these must be valid existing
-    # projects.
-    extras_require={  # Optional
-        'dev': ['check-manifest'],
-        'test': ['coverage'],
-    },
-
     package_data={
+        'dokitheme': [
+            'styles/**/*.*',
+            'styles/*.*',
+            'fonts/*.ttf',
+            'defaults/*.*',
+        ]
     },
 
 
