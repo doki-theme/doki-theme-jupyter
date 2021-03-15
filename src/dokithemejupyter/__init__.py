@@ -8,6 +8,9 @@ def main():
     if arguments.list:
         theme_manager.list_themes()
         exit(0)
+    elif arguments.version:
+        theme_manager.display_current_version()
+        exit(0)
     elif arguments.remove:
         theme_manager.remove_theme()
         exit(0)

@@ -18,24 +18,16 @@ parser.add_argument(
     help='name of theme to install'
 )
 parser.add_argument(
-    '-f',
-    "--set-font",
-    action='store_true',
-    help="install official doki theme font"
-)
-parser.add_argument(
-    '-uf',
-    '-rf',
-    "--remove-font",
-    "--uninstall-font",
-    action='store_true',
-    help="uninstalls official doki theme font"
-)
-parser.add_argument(
     '-u',
     '-r',
     '--remove',
     '--uninstall',
     action='store_true',
     help='restores previous styling'
+)
+parser.add_argument(
+    '-v',
+    '--version',
+    action='store_true',
+    help='current version of the theme'
 )

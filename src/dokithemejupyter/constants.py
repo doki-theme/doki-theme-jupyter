@@ -22,6 +22,7 @@ layouts_dir = os.path.join(local_package_path, 'layout')
 styles_dir = os.path.join(local_package_path, 'styles')
 styles_dir_user = os.path.join(user_config_path, 'styles')
 fonts_path = os.path.join(local_package_path, 'fonts')
+version_file_path = os.path.join(local_package_path, 'version.txt')
 default_styles_path = os.path.join(local_package_path, 'defaults')
 
 current_theme_path = os.path.join(jupyter_custom_config_path, 'current_theme.txt')

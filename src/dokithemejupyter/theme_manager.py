@@ -1,4 +1,4 @@
-from dokithemejupyter.constants import current_theme_path, default_theme
+from dokithemejupyter.constants import current_theme_path, default_theme, version_file_path
 from dokithemejupyter.theme_janitor import remove_theme_artifacts
 from dokithemejupyter.themes import themes
 import os
@@ -6,6 +6,10 @@ from dokithemejupyter.theme_installer import install_theme_styles, open_file
 
 from dokithemejupyter.argument_suggestion import suggest_theme
 
+def display_current_version():
+    if os.path.exists(version_file_path):
+        with open_file(version_file_path, 'r') as current_version:
+            print("Doki Theme: Jupyter Notebook v{}".format(current_version.readlines()[0]))
 
 def list_themes():
     print("Theme Names (include double quotes): \n   {}".format('\n   '.join(

@@ -33,3 +33,4 @@ src/dokithemejupyter/styles/themes/
 
 dist/
 src/doki_theme_jupyter.egg-info/
+src/dokithemejupyter/version.txt

@@ -11,6 +11,12 @@ import pathlib
 
 here = pathlib.Path(__file__).parent.resolve()
 
+version = '0.1.0'
+# write current version
+with open((here / 'src' / 'dokithemejupyter' / 'version.txt'), 'w') as version_file:
+    version_file.write(version)
+
+
 # Get the long description from the README file
 long_description = (here / 'README.md').read_text(encoding='utf-8')
 
@@ -19,7 +25,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='doki-theme-jupyter',
-    version='0.1.0',
+    version=version,
     description='Crunch data with your waifu! Choose a theme based on a girl from various anime series, manga, '
                 'and visual novels.',
     long_description=long_description,
@@ -87,6 +93,7 @@ setup(
             'styles/*.*',
             'fonts/*.ttf',
             'defaults/*.*',
+            'version.txt',
         ]
     },
 
