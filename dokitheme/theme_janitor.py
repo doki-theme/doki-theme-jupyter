@@ -1,9 +1,9 @@
 import os
 from shutil import copyfile
 
-from constants import jupyter_custom_config_path, jupyter_nbext_path, default_css_path, \
+from dokitheme.constants import jupyter_custom_config_path, jupyter_nbext_path, default_css_path, \
     jupyter_customcss_path, jupyter_customjs_path, default_js_path, current_theme_path, jupyter_custom_fonts_path
-from file_system_tools import ensure_directories_exist
+from dokitheme.file_system_tools import ensure_directories_exist
 
 
 def remove_theme_artifacts():

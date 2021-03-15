@@ -5,9 +5,9 @@ from tempfile import mkstemp
 
 import lesscpy
 
-from constants import jupyter_customcss_path, styles_dir, fonts_path, jupyter_custom_fonts_path, jupyter_customjs_path
-from file_system_tools import ensure_directories_exist
-from theme_janitor import remove_theme_artifacts
+from dokitheme.constants import jupyter_customcss_path, styles_dir, fonts_path, jupyter_custom_fonts_path, jupyter_customjs_path
+from dokitheme.file_system_tools import ensure_directories_exist
+from dokitheme.theme_janitor import remove_theme_artifacts
 
 _, evaluated_less_file = mkstemp('.less')
 

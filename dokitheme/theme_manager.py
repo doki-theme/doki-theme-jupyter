@@ -1,10 +1,10 @@
-from constants import current_theme_path, default_theme
-from theme_janitor import remove_theme_artifacts
-from themes import themes
+from dokitheme.constants import current_theme_path, default_theme
+from dokitheme.theme_janitor import remove_theme_artifacts
+from dokitheme.themes import themes
 import os
-from theme_installer import install_theme_styles, open_file
+from dokitheme.theme_installer import install_theme_styles, open_file
 
-from argument_suggestion import suggest_theme
+from dokitheme.argument_suggestion import suggest_theme
 
 
 def list_themes():

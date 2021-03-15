@@ -1,5 +1,5 @@
 import matplotlib as plotter
-from dokitheme.themes import themes
+from dokitheme.theme_manager import get_current_theme
 from cycler import cycler
 
 

@@ -1,12 +1,12 @@
-import theme_manager as theme_manager
-from arguments import parser
+import dokitheme.theme_manager as theme_manager
+from dokitheme.arguments import parser
 
 arguments = parser.parse_args()
 
-if(arguments.list):
+if arguments.list:
     theme_manager.list_themes()
     exit(0)
-elif(arguments.remove):
+elif arguments.remove:
     theme_manager.remove_theme()
     exit(0)
 else:
