@@ -425,7 +425,7 @@ function getDisplayName(dokiTheme: DokiTheme) {
   return `${getGroupName(dokiTheme)}${dokiTheme.definition.name}`;
 }
 
-const themesDirectory = path.resolve(repoDirectory, "src", "dokitheme");
+const themesDirectory = path.resolve(repoDirectory, "src", "dokithemejupyter");
 
 walkDir(jupyterDefinitionDirectoryPath)
   .then((files) =>

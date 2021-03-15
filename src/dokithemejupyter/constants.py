@@ -2,7 +2,7 @@ import os
 
 from jupyter_core.paths import jupyter_config_dir, jupyter_data_dir
 
-# path to local site-packages (dokitheme)
+# path to local site-packages (dokithemejupyter)
 local_package_path = os.path.dirname(os.path.realpath(__file__))
 
 user_config_path = os.path.join(os.path.expanduser('~'), '.doki-theme-jupyter')

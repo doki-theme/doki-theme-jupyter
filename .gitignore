@@ -28,5 +28,5 @@ masterThemes/
 *.pyc
 .ipynb_checkpoints/
 
-src/dokitheme/themes.py
-src/dokitheme/styles/themes/
+src/dokithemejupyter/themes.py
+src/dokithemejupyter/styles/themes/

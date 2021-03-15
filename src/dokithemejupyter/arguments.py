@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 
-from dokitheme.constants import default_theme
+from dokithemejupyter.constants import default_theme
 
 parser = ArgumentParser()
 parser.add_argument(

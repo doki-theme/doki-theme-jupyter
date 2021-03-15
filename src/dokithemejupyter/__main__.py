@@ -1,5 +1,5 @@
-import dokitheme.theme_manager as theme_manager
-from dokitheme.arguments import parser
+import dokithemejupyter.theme_manager as theme_manager
+from dokithemejupyter.arguments import parser
 
 arguments = parser.parse_args()
 

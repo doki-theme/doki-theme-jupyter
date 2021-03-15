@@ -1,6 +1,6 @@
 import os
 
-from dokitheme.constants import jupyter_home_path, jupyter_custom_config_path, jupyter_custom_fonts_path, \
+from dokithemejupyter.constants import jupyter_home_path, jupyter_custom_config_path, jupyter_custom_fonts_path, \
     jupyter_data_path, jupyter_nbext_path
 
 

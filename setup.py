@@ -82,7 +82,7 @@ setup(
     ],
 
     package_data={
-        'dokitheme': [
+        'dokithemejupyter': [
             'styles/**/*.*',
             'styles/*.*',
             'fonts/*.ttf',
@@ -100,7 +100,7 @@ setup(
     # executes the function `main` from this package when invoked:
     entry_points={  # Optional
         'console_scripts': [
-            'sample=sample:main',
+            'dokithemejupyter=dokithemejupyter:main',
         ],
     },
 
@@ -116,7 +116,7 @@ setup(
     project_urls={  # Optional
         'Bug Reports': 'https://github.com/pypa/sampleproject/issues',
         'Funding': 'https://donate.pypi.org',
-        'Say Thanks!': 'http://saythanks.io/to/example',
+        'Say Thanks!': 'https://saythanks.io/to/example',
         'Source': 'https://github.com/pypa/sampleproject/',
     },
 )

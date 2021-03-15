@@ -1,4 +1,4 @@
-from dokitheme.themes import themes
+from dokithemejupyter.themes import themes
 from Levenshtein import distance
 
 
