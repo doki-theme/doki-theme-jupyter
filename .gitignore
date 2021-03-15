@@ -30,3 +30,6 @@ masterThemes/
 
 src/dokithemejupyter/themes.py
 src/dokithemejupyter/styles/themes/
+
+dist/
+src/doki_theme_jupyter.egg-info/
