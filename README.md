@@ -3,10 +3,10 @@ The Doki Theme: Jupyter Notebook
 
 ## Quick Theme Preview
 
-![Themes](./assets/screenshots/themes.webp)
+![Themes](./readmeAssets/quick_theme_preview.webp)
 
 
-# [Screenshots](./albums/complete_theme_album.md)
+# [More Screenshots](./albums/screenshot_album.md)
 
 
 ## Quick Start!
@@ -42,6 +42,7 @@ This plugin is for serious Otaku data enthusiasts.
 
 For the optimal experience it's best you have:
 
+- [Doki Theme Web](https://github.com/doki-theme/doki-theme-web)
 - Jupyter Notebook >=6.0.0
 - Python >=3.7
 - pip 21.0 >= (Just having pip should suffice)
