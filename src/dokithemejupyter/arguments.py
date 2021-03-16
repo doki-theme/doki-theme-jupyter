@@ -12,7 +12,6 @@ parser.add_argument(
 parser.add_argument(
     '-t',
     '--set-theme',
-    default=default_theme,
     metavar='theme',
     action='store',
     help='name of theme to install'
