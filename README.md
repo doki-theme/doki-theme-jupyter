@@ -92,7 +92,7 @@ dokithemejupyter --set-theme "Franxx: Zero Two Dark"
 ```
 
 This is the most important command, which enables the decoration of your notebook with your waifu!
-**Important**, theme arguments are exact match and require the `"""`, don't forget to add those!
+**Important**, theme arguments are exact match and require the `""`, don't forget to add those!
 
 **Sticker**
 
