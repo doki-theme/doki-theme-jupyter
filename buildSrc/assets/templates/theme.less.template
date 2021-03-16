@@ -1,5 +1,6 @@
 @wallpaper: 'https://doki.assets.unthrottled.io/backgrounds/wallpapers/transparent/{{stickerName}}';
 @wallpaper-anchor: {{anchor}};
+@sticker-url: 'https://doki.assets.unthrottled.io/stickers/jetbrains/v2{{stickerPath}}';
 @base-background: {{baseBackground}};
 @header-color: {{headerColor}};
 @text-editor-background: {{textEditorBackground}};

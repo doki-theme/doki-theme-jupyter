@@ -15,4 +15,7 @@ def main():
         theme_manager.remove_theme()
         exit(0)
     else:
-        exit(theme_manager.install_theme(arguments.set_theme))
+        exit(theme_manager.install_theme((
+            arguments.set_theme,
+            arguments.sticker,
+        )))

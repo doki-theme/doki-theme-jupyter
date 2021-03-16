@@ -12,12 +12,16 @@ from dokithemejupyter.theme_janitor import remove_theme_artifacts
 _, evaluated_less_file = mkstemp('.less')
 
 
-def create_theme_styles(theme_id):
+def create_theme_styles(theme_id, install_sticker):
     with open_file(os.path.join(styles_dir, 'themes', theme_id + '.less'), 'r') as base_styles:
         styles = base_styles.read() + '\n'
 
     with open_file(os.path.join(styles_dir, 'base.less'), 'r') as base_styles:
         styles += base_styles.read() + '\n'
+
+    if install_sticker:
+        with open_file(os.path.join(styles_dir, 'sticker.less'), 'r') as base_styles:
+            styles += base_styles.read() + '\n'
 
     with open_file(evaluated_less_file, 'w') as evaluated_less:
         evaluated_less.write(styles)
@@ -25,8 +29,8 @@ def create_theme_styles(theme_id):
     return lesscpy.compile(evaluated_less_file) + '\n\n'
 
 
-def install_theme(theme_definition):
-    css_string = create_theme_styles(theme_definition['id'])
+def install_theme(theme_definition, install_sticker):
+    css_string = create_theme_styles(theme_definition['id'], install_sticker)
     write_final_css(css_string)
 
 
@@ -85,10 +89,10 @@ def write_final_javascript(javascript_as_string):
         custom_css.write(javascript_as_string)
 
 
-def install_theme_styles(theme_definition):
+def install_theme_styles(theme_definition, install_sticker):
     remove_theme_artifacts()
     ensure_directories_exist()
-    install_theme(theme_definition)
+    install_theme(theme_definition, install_sticker)
     copy_fonts()
     install_javascript(theme_definition)
 

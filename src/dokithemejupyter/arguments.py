@@ -17,6 +17,12 @@ parser.add_argument(
     help='name of theme to install'
 )
 parser.add_argument(
+    '-s',
+    '--sticker',
+    action='store_true',
+    help='installs sticker'
+)
+parser.add_argument(
     '-u',
     '-r',
     '--remove',

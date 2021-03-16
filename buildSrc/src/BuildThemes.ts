@@ -293,7 +293,8 @@ function sanitizeColor(colorValue: string): string {
 function buildTemplateVariables(
   dokiThemeDefinition: MasterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
-  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition
+  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition,
+  dokiFileDefinitionPath: string,
 ): DokiThemeJupyter {
   const namedColors: StringDictionary<string> = constructNamedColorTemplate(
     dokiThemeDefinition,
@@ -315,6 +316,7 @@ function buildTemplateVariables(
     stickerName: dokiThemeDefinition.stickers.default,
     anchor: dokiThemeJupyterDefinition.backgrounds?.default?.anchor || 'center',
     editorAccentColor: dokiThemeDefinition.overrides?.editorScheme?.colors?.accentColor || evaluatedColors.accentColor,
+    stickerPath: getStickers(dokiThemeDefinition, dokiFileDefinitionPath).default.path,
   };
 }
 
@@ -332,7 +334,8 @@ function createDokiTheme(
       templateVariables: buildTemplateVariables(
         dokiThemeDefinition,
         dokiTemplateDefinitions,
-        dokiThemeJupyterDefinition
+        dokiThemeJupyterDefinition,
+        dokiFileDefinitionPath,
       ),
       theme: {},
       jupyterDefinition: dokiThemeJupyterDefinition,
