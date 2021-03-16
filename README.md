@@ -8,11 +8,6 @@ The Doki Theme: Jupyter Notebook
 
 # [More Screenshots](./albums/screenshot_album.md)
 
-
-## Quick Start!
-
-I've put together a [demo notebook](./index.ipynb) that demonstrates the core functionality of the `doki-theme-jupyter` package.
-
 **About** 
 
 Does your Jupyter Notebook need more anime girls?
@@ -25,16 +20,20 @@ This plugin is for serious Otaku data enthusiasts.
 # Documentation
 
 - [Installation](#installation)
-    -[Requirements](#pre-requisites)  
-    -[Package Install](#package-install)
+    - [Requirements](#pre-requisites)  
+    - [Package Install](#package-install)
 - [Usage](#usage)
-  -[CLI](#command-line-interface)
-  -[Python API](#python-api)
-    -[Decorator](#decorator)
+  - [CLI](#command-line-interface)
+  - [Python API](#python-api)
+    - [Decorator](#decorator)
 - [Miscellaneous](#miscellaneous)
     - [Theme Requests](#theme-requests)
     - [Helping the community](#enjoying-the-plugin)
     - [Feature Requests](#contributions)
+
+# Quick Start!
+
+I've put together a [demo notebook](./index.ipynb) that demonstrates the core functionality of the `doki-theme-jupyter` package.
 
 # Installation 
 
