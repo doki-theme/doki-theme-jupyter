@@ -536,6 +536,7 @@ walkDir(jupyterDefinitionDirectoryPath)
           [getDisplayName(dokiTheme)]: {
             id: dokiTheme.definition.id,
             colors: dokiTheme.templateVariables,
+            name: dokiTheme.definition.displayName,
           }
         }), {}),
         null,

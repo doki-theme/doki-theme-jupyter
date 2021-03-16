@@ -36,3 +36,6 @@ def decorate_plotter():
             ]
         )
     })
+    print("Matplotlib's plots are decorated with {}'s color scheme".format(
+        doki_theme['name']
+    ))
