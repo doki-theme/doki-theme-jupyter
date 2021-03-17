@@ -12,6 +12,7 @@ import pathlib
 here = pathlib.Path(__file__).parent.resolve()
 
 version = '0.1.0'
+
 # write current version
 with open((here / 'src' / 'dokithemejupyter' / 'version.txt'), 'w') as version_file:
     version_file.write(version)
@@ -121,9 +122,7 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/pypa/sampleproject/issues',
-        'Funding': 'https://donate.pypi.org',
-        'Say Thanks!': 'https://saythanks.io/to/example',
-        'Source': 'https://github.com/pypa/sampleproject/',
+        'Bug Reports': 'https://github.com/doki-theme/doki-theme-jupyter/issues',
+        'Source': 'https://github.com/doki-theme/doki-theme-jupyter/',
     },
 )

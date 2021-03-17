@@ -13,7 +13,7 @@ The Doki Theme: Jupyter Notebook
 Does your Jupyter Notebook need more anime girls?
 Crunch data with your waifu. With over **30** themes,
 I think you will find best girl.
-This plugin is for serious Otaku data enthusiasts.
+This Python package is for serious Otaku data enthusiasts.
 
 ---
 
