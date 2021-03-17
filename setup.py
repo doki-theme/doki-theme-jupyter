@@ -27,8 +27,8 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 setup(
     name='doki-theme-jupyter',
     version=version,
-    description='Crunch data with your waifu! Choose a theme based on a girl from various anime series, manga, '
-                'and visual novels.',
+    description='Crunch data with your waifu! Choose a Jupyter Notebook theme based on a girl from various anime '
+                'series, manga, and visual novels.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/doki-theme/doki-theme-jupyter',

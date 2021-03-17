@@ -3,10 +3,10 @@ The Doki Theme: Jupyter Notebook
 
 ## Quick Theme Preview
 
-![Themes](./readmeAssets/quick_theme_preview.webp)
+![Themes](https://raw.githubusercontent.com/doki-theme/doki-theme-jupyter/main/readmeAssets/quick_theme_preview.webp)
 
 
-# [More Screenshots](./albums/screenshot_album.md)
+# [More Screenshots](https://github.com/doki-theme/doki-theme-jupyter/blob/main/albums/screenshot_album.md)
 
 **About** 
 
@@ -33,7 +33,7 @@ This Python package is for serious Otaku data enthusiasts.
 
 # Quick Start!
 
-I've put together a [demo notebook](./index.ipynb) that demonstrates the core functionality of the `doki-theme-jupyter` package.
+I've put together a [demo notebook](https://github.com/doki-theme/doki-theme-jupyter/blob/main/index.ipynb) that demonstrates the core functionality of the `doki-theme-jupyter` package.
 
 # Installation 
 
