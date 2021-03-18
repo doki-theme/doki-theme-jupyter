@@ -11,7 +11,7 @@ import pathlib
 
 here = pathlib.Path(__file__).parent.resolve()
 
-version = '0.1.1'
+version = '0.2.0'
 
 # write current version
 with open((here / 'src' / 'dokithemejupyter' / 'version.txt'), 'w') as version_file:
