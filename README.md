@@ -15,6 +15,24 @@ Crunch data with your waifu. With over **30** themes,
 I think you will find best girl.
 This Python package is for serious Otaku data enthusiasts.
 
+You can choose themes from various, Anime, Manga, or Visual Novels:
+
+- DanganRonpa
+- Doki-Doki Literature Club
+- Fate
+- Gate
+- High School DxD
+- Kill La Kill
+- KonoSuba
+- Love Live!
+- Lucky Star
+- Miss Kobayashi's Dragon Maid
+- Neon Genesis Evangelion
+- OreGairu
+- Re:Zero
+- Steins Gate
+- Sword Art Online
+
 ---
 
 # Documentation
