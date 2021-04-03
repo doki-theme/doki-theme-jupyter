@@ -1,5 +1,5 @@
 import {
-  StringDictonary,
+  StringDictionary,
   DokiThemeDefinitions,
   BaseAppDokiThemeDefinition,
   MasterDokiThemeDefinition,
@@ -56,7 +56,7 @@ function buildTemplateVariables(
   dokiThemeJupyterDefinition: JupyterDokiThemeDefinition,
   dokiFileDefinitionPath: string,
 ): DokiThemeJupyter {
-  const namedColors: StringDictonary<string> = constructNamedColorTemplate(
+  const namedColors: StringDictionary<string> = constructNamedColorTemplate(
     dokiThemeDefinition,
     dokiTemplateDefinitions
   );
@@ -67,7 +67,7 @@ function buildTemplateVariables(
       ...accum,
       [colorName]: sanitizeColor(colorValue),
     }), {});
-  const evaluatedColors: StringDictonary<string> = {
+  const evaluatedColors: StringDictionary<string> = {
     ...cleanedColors,
     ...colorsOverride,
   };
@@ -83,8 +83,9 @@ function buildTemplateVariables(
 function createDokiTheme(
   dokiFileDefinitionPath: string,
   dokiThemeDefinition: MasterDokiThemeDefinition,
+  _: DokiThemeDefinitions,
+  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition,
   dokiTemplateDefinitions: DokiThemeDefinitions,
-  dokiThemeJupyterDefinition: JupyterDokiThemeDefinition
 ) {
   try {
     return {
