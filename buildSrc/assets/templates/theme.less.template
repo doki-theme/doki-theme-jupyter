@@ -39,4 +39,4 @@
 @diff-conflict: {{diff.conflict}};
 @error-color: {{errorColor}};
 @non-project-file-scope-color: {{nonProjectFileScopeColor}};
-@search-result-background: {{searchResultBackground}};
+@folded-text-background: {{foldedTextBackground}};
