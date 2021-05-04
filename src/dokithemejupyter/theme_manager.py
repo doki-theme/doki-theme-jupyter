@@ -15,7 +15,7 @@ def display_current_version():
 
 def list_themes():
     print("Theme Names (include double quotes): \n   {}".format('\n   '.join(
-        map(lambda theme_name: '"{}"'.format(theme_name[0]), themes.items()),
+        map(lambda theme_name: '"{}"'.format(theme_name[0]), sorted(themes.items(), key=lambda theme_name: theme_name[0])),
     )))
 
 
