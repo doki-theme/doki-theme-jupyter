@@ -18,6 +18,7 @@ This Python package is for serious Otaku data enthusiasts.
 You can choose themes from various, Anime, Manga, or Visual Novels:
 
 - Blend S
+- Daily life with a monster girl
 - DanganRonpa
 - Darling in the Franxx
 - Doki-Doki Literature Club
@@ -31,6 +32,7 @@ You can choose themes from various, Anime, Manga, or Visual Novels:
 - Miss Kobayashi's Dragon Maid
 - Neon Genesis Evangelion
 - OreGairu
+- Quintessential Quintuplets
 - Rascal does not dream of bunny girl senpai
 - Re:Zero
 - Steins Gate
