@@ -1,0 +1,7 @@
+**Packaging**
+python setup.py bdist_wheel --universal
+twine check dist/*
+ 8673  pip install doki_theme_jupyter-1.0.0-py2.py3-none-any.whl
+ 8682  twine upload --repository testpypi dist/doki_theme_jupyter-1.0.0-py2.py3-none-any.whl
+ 8683  twine upload dist/doki_theme_jupyter-1.0.0-py2.py3-none-any.whl
+ 9168  pip remove dist/doki_theme_jupyter-2.0.0-py2.py3-none-any.whl

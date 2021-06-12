@@ -11,7 +11,7 @@ The Doki Theme: Jupyter Notebook
 **About** 
 
 Does your Jupyter Notebook need more anime girls?
-Crunch data with your waifu. With over **40** themes,
+Crunch data with your waifu. With over **50** themes,
 I think you will find best girl.
 This Python package is for serious Otaku data enthusiasts.
 
@@ -21,15 +21,19 @@ You can choose themes from various, Anime, Manga, or Visual Novels:
 - Daily life with a monster girl
 - DanganRonpa
 - Darling in the Franxx
+- Don't Toy With Me, Miss Nagatoro
 - Doki-Doki Literature Club
 - Fate
+- Future Diary
 - Gate
 - High School DxD
+- Kakegurui
 - Kill La Kill
 - KonoSuba
 - Love Live!
 - Lucky Star
 - Miss Kobayashi's Dragon Maid
+- Monogatari
 - Neon Genesis Evangelion
 - OreGairu
 - Quintessential Quintuplets
@@ -37,6 +41,7 @@ You can choose themes from various, Anime, Manga, or Visual Novels:
 - Re:Zero
 - Steins Gate
 - Sword Art Online
+- Yuru Camp
 
 ---
 
