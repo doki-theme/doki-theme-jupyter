@@ -55,8 +55,9 @@ You can choose themes from various, Anime, Manga, or Visual Novels:
   - [Python API](#python-api)
     - [Decorator](#decorator)
 - [Miscellaneous](#miscellaneous)
+    - [Contributing](#contributing)  
     - [Theme Requests](#theme-requests)
-    - [Helping the community](#enjoying-the-plugin)
+    - [Helping the community](#enjoying-the-themes)
     - [Feature Requests](#contributions)
 
 # Quick Start!
@@ -172,6 +173,11 @@ decorator.decorate_plotter()
 You'll just need to have this code get run once before you do any plotting.
 
 # Miscellaneous
+
+## Contributing
+
+If you want to get your workstation set up to work on the plugin,
+then you'll want to check out the [CONTRIBUTING.md](./CONTRIBUTING.md) for instructions on what is needed.
 
 ## Theme Requests
 
