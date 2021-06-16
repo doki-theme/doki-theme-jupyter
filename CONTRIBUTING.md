@@ -15,7 +15,7 @@ what is accomplished.
 
 All themes have a base template that they inherit from. Themes have the ability to choose their inherited parent. Each
 child has the ability to override any attributes defined by the parent. This mitigates any one-off issues for themes
-that are captured by the global shared style.
+that are not captured by the global shared style.
 
 # Getting Started
 
@@ -158,7 +158,7 @@ I haven't figured out a good way to test theme changes, so here's what I do.
 3. Make changes to the various sources
 4. Refresh the browser window Jupyter is running in
 5. Contemplate life choices
-6. Repeat until satisfied.
+6. Repeat steps 3-5 until satisfied.
 
 ![Dev Work Flow](./readmeAssets/dev_workflow.gif)
 
