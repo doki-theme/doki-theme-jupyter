@@ -84,7 +84,7 @@ Which enables you decorate your notebook from your shell or notebook!
 To install the package just run this command:
 
 ```shell
-pip install dokithemejupyter
+pip install pip doki-theme-jupyter
 ```
 
 # Usage
