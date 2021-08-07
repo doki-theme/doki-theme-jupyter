@@ -1,7 +1,7 @@
 Changelog
 ---
 
-# 4.0.0 [NekoPara OneeSan Vol.]
+# 5.0.0 [NekoPara OneeSan Vol.]
 
 ## 4 New Themes!!
 
@@ -10,6 +10,17 @@ Changelog
 - Azuki (Dark)
 
 ![v18 Girls](https://doki.assets.unthrottled.io/misc/v18_girls.png)
+
+# 4.0.0 [NekoPara Release]
+
+## 3 New Themes!!
+
+- Chocola (Dark)
+- Vanilla (Dark)
+- Coconut (Dark)
+
+![v17 Girls](https://doki.assets.unthrottled.io/misc/v17_girls.png)
+
 
 # 3.0.0 [Hanekawa, Shima Rin, Nagatoro, Yumeko, & Yuno]
 
