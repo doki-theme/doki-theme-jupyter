@@ -1,7 +1,7 @@
 Changelog
 ---
 
-# 16.0.0 [KillLaKill Alt. Themes & Only for Onii-Chan]
+# 6.0.0 [KillLaKill Alt. Themes & Only for Onii-Chan]
 
 ## KillLaKill Alt. Themes
 
