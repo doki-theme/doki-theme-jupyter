@@ -23,6 +23,7 @@ You can choose themes from various, Anime, Manga, or Visual Novels:
 - Darling in the Franxx
 - Don't Toy With Me, Miss Nagatoro
 - Doki-Doki Literature Club
+- EroManga Sensei
 - Fate
 - Future Diary
 - Gate
@@ -37,6 +38,7 @@ You can choose themes from various, Anime, Manga, or Visual Novels:
 - NekoPara
 - Neon Genesis Evangelion
 - OreGairu
+- OreImo
 - Quintessential Quintuplets
 - Rascal does not dream of bunny girl senpai
 - Re:Zero
