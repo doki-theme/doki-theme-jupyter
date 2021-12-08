@@ -17,6 +17,7 @@ This Python package is for serious Otaku data enthusiasts.
 
 You can choose themes from various, Anime, Manga, or Visual Novels:
 
+- AzurLane
 - Blend S
 - Daily life with a monster girl
 - DanganRonpa
