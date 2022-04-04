@@ -3,13 +3,5 @@
   "overrides": {},
   "laf": {},
   "syntax": {},
-  "colors": {},
-  "backgrounds": {
-    "default": {
-      "anchor": "right"
-    },
-    "secondary": {
-      "anchor": "right"
-    }
-  }
+  "colors": {}
 }
