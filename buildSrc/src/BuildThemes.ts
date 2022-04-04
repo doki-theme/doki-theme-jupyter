@@ -33,7 +33,7 @@ type DokiThemeJupyter = {
   [k: string]: any;
 };
 
-function hexToRGBA(hex) {
+function hexToRGBA(hex: string) {
   const hexValue = parseInt(hex.substring(1), 16);
   return 'rgba(' + [
     (hexValue >> 24) & 255,
