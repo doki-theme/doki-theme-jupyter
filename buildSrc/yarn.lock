@@ -628,6 +628,11 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.31.tgz#72286bd33d137aa0d152d47ec7c1762563d34055"
   integrity sha512-vFHy/ezP5qI0rFgJ7aQnjDXwAMrG0KqqIH7tQG5PPv3BWBayOPIQNBjVc/P6hhdZfMx51REc6tfDNXHUio893g==
 
+"@types/node@^17.0.23":
+  version "17.0.23"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.23.tgz#3b41a6e643589ac6442bdbd7a4a3ded62f33f7da"
+  integrity sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==
+
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
@@ -1895,10 +1900,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-doki-build-source@74.1.0:
-  version "74.1.0"
-  resolved "https://registry.yarnpkg.com/doki-build-source/-/doki-build-source-74.1.0.tgz#2ae6c74273de4cf3021d7a5cdbbfe4369c50439a"
-  integrity sha512-6CitL8Qw9LM9NqTFLNJxe5p7g1yhhE9uSUajRTwXLJisdVtMmjIIdx6Hodcwi1sxi7qBmUBMKd1JF3jlGZ61rQ==
+doki-build-source@78.2.3:
+  version "78.2.3"
+  resolved "https://registry.yarnpkg.com/doki-build-source/-/doki-build-source-78.2.3.tgz#23bacab848f51d4389615a373d266575ea880c86"
+  integrity sha512-8DmTsQTEriYKWweb6zd0VFQOj5w/A31ScF1eRQjrQ8WdkB8zf5bTzqJ115ADWsTjwElBqY1gDIvD19K4+oPesg==
 
 domain-browser@^1.1.1:
   version "1.2.0"

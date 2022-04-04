@@ -33,7 +33,7 @@ type DokiThemeJupyter = {
   [k: string]: any;
 };
 
-function hexToRGBA(hex) {
+function hexToRGBA(hex: string) {
   const hexValue = parseInt(hex.substring(1), 16);
   return 'rgba(' + [
     (hexValue >> 24) & 255,
@@ -73,8 +73,8 @@ function buildTemplateVariables(
   };
   return {
     ...evaluatedColors,
-    stickerName: dokiThemeDefinition.stickers.default,
-    anchor: dokiThemeJupyterDefinition.backgrounds?.default?.anchor || 'center',
+    stickerName: dokiThemeDefinition.stickers.default.name,
+    anchor: dokiThemeDefinition.stickers.default.anchor || 'center',
     editorAccentColor: dokiThemeDefinition.overrides?.editorScheme?.colors?.accentColor || evaluatedColors.accentColor,
     stickerPath: getStickers(dokiThemeDefinition, dokiFileDefinitionPath).default.path,
   };
@@ -123,17 +123,17 @@ const getStickers = (
   themePath: string
 ) => {
   const secondary =
-    dokiDefinition.stickers.secondary || dokiDefinition.stickers.normal;
+    dokiDefinition.stickers.secondary;
   return {
     default: {
-      path: resolveStickerPath(themePath, dokiDefinition.stickers.default),
-      name: dokiDefinition.stickers.default,
+      path: resolveStickerPath(themePath, dokiDefinition.stickers.default.name),
+      name: dokiDefinition.stickers.default.name,
     },
     ...(secondary
       ? {
         secondary: {
-          path: resolveStickerPath(themePath, secondary),
-          name: secondary,
+          path: resolveStickerPath(themePath, secondary.name),
+          name: secondary.name,
         },
       }
       : {}),
