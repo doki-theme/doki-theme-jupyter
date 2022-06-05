@@ -4,7 +4,9 @@ yarn buildThemes
 cd ../src
 #python3 -m src/dokithemejupyter --set-theme "Franxx: Zero Two Dark"
 #python3 -m dokithemejupyter --set-theme "NekoPara: Maple Dark" --sticker
-python3 -m dokithemejupyter --set-theme "KillLaKill: Ryuko Dark" --sticker
+#python3 -m dokithemejupyter --set-theme "KillLaKill: Ryuko Dark" --sticker
+python3 -m dokithemejupyter --set-theme "KillLaKill: Ryuko Light" --sticker
+#python3 -m dokithemejupyter --set-theme "QQ: Nakano Itsuki" --sticker
 #python3 -m dokithemejupyter --set-theme "Haikyu: Hinata Shoyo" --sticker
 #python3 -m dokithemejupyter --set-theme "ShieldHero: Raphtalia" --sticker
 #python3 -m dokithemejupyter --set-theme "NekoPara: Christmas Chocola" --sticker
