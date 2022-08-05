@@ -131,7 +131,7 @@ Wow! That's a bunch of themes! This command will output all the available themes
 **Set Theme**
 
 ```shell
-dokithemejupyter --set-theme "Franxx: Zero Two Dark"
+dokithemejupyter --set-theme "Franxx: Zero Two Dark Obsidian"
 ```
 
 This is the most important command, which enables the decoration of your notebook with your waifu!
@@ -140,7 +140,7 @@ This is the most important command, which enables the decoration of your noteboo
 **Sticker**
 
 ```shell
-dokithemejupyter --sticker --set-theme "Franxx: Zero Two Dark"
+dokithemejupyter --sticker --set-theme "Franxx: Zero Two Dark Obsidian"
 ```
 
 This installs your selected theme with the cute sticker in the righthand corner.
