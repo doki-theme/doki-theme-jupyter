@@ -98,7 +98,6 @@ def install_theme_styles(theme_definition, install_sticker):
 
 
 def write_final_css(css_as_string):
-    print(jupyter_customcss_path)
     with open_file(jupyter_customcss_path, 'w') as custom_css:
         custom_css.write(css_as_string)
 
