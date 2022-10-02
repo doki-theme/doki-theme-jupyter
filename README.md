@@ -152,6 +152,12 @@ dokithemejupyter --sticker
 
 Will only install the sticker for the current theme.
 
+```shell
+dokithemejupyter --disable-wallpaper
+```
+
+Will remove the installed-by-default wallpaper for the current theme. The argument can also be passed while setting the theme as well.
+
 **Remove**
 
 ```shell
