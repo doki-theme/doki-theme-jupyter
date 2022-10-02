@@ -23,6 +23,12 @@ parser.add_argument(
     help='installs sticker'
 )
 parser.add_argument(
+    '-dw',
+    '--disable-wallpaper',
+    action='store_true',
+    help='installs theme without wallpaper'
+)
+parser.add_argument(
     '-u',
     '-r',
     '--remove',

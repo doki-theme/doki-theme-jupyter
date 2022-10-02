@@ -41,7 +41,7 @@ def remove_theme():
 
 
 def install_theme(theme_install_parameters):
-    theme_parameter, install_sticker = theme_install_parameters
+    theme_parameter, install_options = theme_install_parameters
     if theme_parameter is None:
         theme_parameter = read_current_theme()
     elif theme_parameter not in themes:
@@ -53,7 +53,7 @@ def install_theme(theme_install_parameters):
         )
         return -1
 
-    install_theme_styles(themes[theme_parameter], install_sticker)
+    install_theme_styles(themes[theme_parameter], install_options)
 
     write_current_theme(theme_parameter)
 

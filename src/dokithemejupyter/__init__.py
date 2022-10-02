@@ -2,6 +2,12 @@ import dokithemejupyter.theme_manager as theme_manager
 from dokithemejupyter.arguments import parser
 
 
+class InstallOptions:
+    def __init__(self, install_sticker, disable_wallpaper):
+        self.install_sticker = install_sticker
+        self.install_wallpaper = not disable_wallpaper
+
+
 def main():
     arguments = parser.parse_args()
 
@@ -17,5 +23,8 @@ def main():
     else:
         exit(theme_manager.install_theme((
             arguments.set_theme,
-            arguments.sticker,
+            InstallOptions(
+                arguments.sticker,
+                arguments.disable_wallpaper
+            )
         )))

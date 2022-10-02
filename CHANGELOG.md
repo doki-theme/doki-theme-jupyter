@@ -1,5 +1,9 @@
 Changelog
 ---
+# 88.1-1.1.0 [Disable Wallpaper]
+
+- Added a `-dw` & `--disable-wallpaper` which will disable the, enabled by default, install wallpaper option. 
+
 # 88.1-1.0.0 [Rimuru]
 
 - It was brought to my attention that I cannot spell "Rimuru".
